@@ -13,6 +13,11 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { cn } from "@/lib/utils";
 import { useWizard } from "@/features/wizard/context";
 import { PhotoDropzone } from "./PhotoDropzone";
+import {
+  LIGHTING_STYLES,
+  PhotoLightingControl,
+  type LightingMode,
+} from "@/components/PhotoLightingControl";
 
 export interface UploadProblem {
   title: string;
@@ -121,6 +126,8 @@ export function PhotoStep() {
   const [problem, setProblem] = useState<UploadProblem | null>(null);
   const [showUploader, setShowUploader] = useState(false);
   const [jobId, setJobId] = useState<string | null>(null);
+  const [lighting, setLighting] = useState<LightingMode>("day");
+  const lightingStyle = LIGHTING_STYLES[lighting];
   const problemId = useId();
 
   const analysing = project.stage === "analyzing";
@@ -272,7 +279,20 @@ export function PhotoStep() {
   } else if (project.photo && !showUploader && project.stage !== "upload" && project.stage !== "photo_rejected" && project.stage !== "photo_warning") {
     body = (
       <Card className="overflow-hidden">
-        <div className="bg-muted">
+        <div className="flex items-center justify-between border-b border-border/80 bg-card/60 px-4 py-2.5">
+          <span className="text-xs font-semibold text-muted-foreground">Original Facade Photo</span>
+          <PhotoLightingControl mode={lighting} onChange={setLighting} />
+        </div>
+        <div
+          className="relative overflow-hidden bg-muted transition-all duration-300"
+          style={{ filter: lightingStyle.filter }}
+        >
+          {lightingStyle.overlayStyle && (
+            <div
+              className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+              style={lightingStyle.overlayStyle}
+            />
+          )}
           <img src={project.photo.url} alt={copy.photo.currentPhoto} className="mx-auto max-h-[28rem] w-full object-contain" />
         </div>
         <CardContent className="space-y-4 pt-4 sm:pt-5">

@@ -1,46 +1,44 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
 /*
- * "Warm architectural studio": warm paper surfaces, one deep-teal action colour, quiet borders.
- * Light mode only (no dark theme is part of the product).
- * Colours keep text at WCAG AA contrast (4.5:1) on white and on their soft backgrounds.
+ * Renova AI Theme:
+ * Fresh, high-clarity Blue & White architectural design system.
+ * Pure white cards, crisp light canvas, vibrant royal & sapphire blue accents,
+ * soft sky/ice blue highlights, and refined readability.
  */
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.985 0.004 95);
-  --foreground: oklch(0.22 0.02 255);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 255);
+  --background: oklch(0.985 0.005 240);      /* Clean light off-white (#f8fafc) */
+  --foreground: oklch(0.2 0.02 250);         /* Deep slate/navy ink text (#0f172a) */
+  --card: oklch(1 0 0);                      /* Pure white (#ffffff) */
+  --card-foreground: oklch(0.2 0.02 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 255);
-  --primary: oklch(0.46 0.09 186);
-  --primary-hover: oklch(0.4 0.08 186);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.95 0.01 186);
-  --secondary-foreground: oklch(0.3 0.05 200);
-  --muted: oklch(0.96 0.005 95);
-  --muted-foreground: oklch(0.47 0.02 255);
-  --accent: oklch(0.94 0.02 186);
-  --accent-foreground: oklch(0.3 0.05 200);
-  --destructive: oklch(0.55 0.2 27);
-  --destructive-soft: oklch(0.97 0.02 27);
+  --popover-foreground: oklch(0.2 0.02 250);
+  --primary: oklch(0.55 0.22 255);            /* Vibrant Architectural Blue (#2563eb) */
+  --primary-hover: oklch(0.48 0.22 255);     /* Deep Royal Blue (#1d4ed8) */
+  --primary-foreground: oklch(0.99 0 0);     /* Crisp pure white */
+  --secondary: oklch(0.965 0.025 250);       /* Soft ice blue tint (#eff6ff) */
+  --secondary-foreground: oklch(0.35 0.15 255);/* Royal blue text (#1e40af) */
+  --muted: oklch(0.96 0.006 240);            /* Light cool gray (#f1f5f9) */
+  --muted-foreground: oklch(0.5 0.02 240);   /* Mid slate text (#64748b) */
+  --accent: oklch(0.95 0.04 250);            /* Sky blue wash (#dbeafe) */
+  --accent-foreground: oklch(0.32 0.16 255);  /* Deep blue accent text */
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-soft: oklch(0.97 0.025 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --warning: oklch(0.8 0.15 75);
-  --warning-soft: oklch(0.97 0.05 85);
-  --warning-foreground: oklch(0.42 0.1 60);
-  --success: oklch(0.47 0.11 152);
-  --success-soft: oklch(0.96 0.04 155);
-  --border: oklch(0.9 0.01 95);
-  --border-strong: oklch(0.84 0.012 95);
-  --input: oklch(0.86 0.012 95);
-  --ring: oklch(0.46 0.09 186);
-  /* Paper tint for the band behind page headers and the auth screen. */
-  --paper: oklch(0.965 0.012 85);
-  --shadow-card: 0 1px 2px oklch(0.22 0.02 255 / 0.04), 0 2px 6px oklch(0.22 0.02 255 / 0.04);
-  --shadow-raised: 0 2px 4px oklch(0.22 0.02 255 / 0.05), 0 8px 24px oklch(0.22 0.02 255 / 0.08);
-  --shadow-overlay: 0 12px 40px oklch(0.22 0.02 255 / 0.18);
+  --warning: oklch(0.75 0.16 75);
+  --warning-soft: oklch(0.97 0.04 80);
+  --warning-foreground: oklch(0.38 0.1 70);
+  --success: oklch(0.6 0.18 155);
+  --success-soft: oklch(0.96 0.03 155);
+  --border: oklch(0.91 0.008 240);           /* Crisp light border (#e2e8f0) */
+  --border-strong: oklch(0.83 0.012 240);    /* Stronger border (#cbd5e1) */
+  --input: oklch(0.91 0.008 240);
+  --ring: oklch(0.55 0.22 255);
+  --paper: oklch(0.98 0.006 240);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.03);
+  --shadow-raised: 0 4px 14px rgba(15, 23, 42, 0.08), 0 12px 28px rgba(15, 23, 42, 0.06);
+  --shadow-overlay: 0 20px 45px rgba(15, 23, 42, 0.25);
 }
 
 @theme inline {
@@ -80,7 +78,6 @@
   --shadow-card: var(--shadow-card);
   --shadow-raised: var(--shadow-raised);
   --shadow-overlay: var(--shadow-overlay);
-  /* Inter was declared before but never shipped; the system stack is used on purpose (no web font download). */
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -95,7 +92,6 @@
   }
   html {
     -webkit-text-size-adjust: 100%;
-    /* Keep focused fields clear of the sticky header and the sticky action bars. */
     scroll-padding-top: 5rem;
     scroll-padding-bottom: 6.5rem;
   }
@@ -115,7 +111,6 @@
   summary {
     cursor: pointer;
   }
-  /* Links and other plain elements get the same visible focus as the controls. */
   a:focus-visible,
   summary:focus-visible {
     outline: 2px solid var(--ring);
@@ -123,7 +118,7 @@
     border-radius: 4px;
   }
   dialog::backdrop {
-    background: oklch(0.22 0.02 255 / 0.45);
+    background: oklch(0.2 0.02 240 / 0.45);
   }
 }
 

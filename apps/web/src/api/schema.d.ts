@@ -848,7 +848,7 @@ export interface components {
              * Label
              * @enum {string}
              */
-            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge";
+            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge" | "canopy" | "louvers" | "compound_wall";
             /** Region Ids */
             region_ids: string[];
             /** Measured Quantity */
@@ -953,7 +953,7 @@ export interface components {
             /** Description */
             description: string;
             /** Applicable Labels */
-            applicable_labels: ("wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge")[];
+            applicable_labels: ("wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge" | "canopy" | "louvers" | "compound_wall")[];
             /**
              * Pricing Unit
              * @enum {string}
@@ -1212,7 +1212,7 @@ export interface components {
              * Label
              * @enum {string}
              */
-            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge";
+            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge" | "canopy" | "louvers" | "compound_wall";
             /** Polygon */
             polygon: [
                 number,
@@ -1237,7 +1237,7 @@ export interface components {
              * Label
              * @enum {string}
              */
-            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge";
+            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge" | "canopy" | "louvers" | "compound_wall";
             /** Friendly Label */
             friendly_label: string;
             /** Polygon */
@@ -1394,7 +1394,7 @@ export interface components {
              * Label
              * @enum {string}
              */
-            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge";
+            label: "wall" | "window" | "door" | "balcony" | "pillar" | "parapet" | "railing" | "gate" | "roof_edge" | "canopy" | "louvers" | "compound_wall";
             /** Net Px */
             net_px: number;
             /**

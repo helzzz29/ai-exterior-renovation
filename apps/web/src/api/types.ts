@@ -14,7 +14,7 @@ export type PhotoUploadResult = S["PhotoUploadResult"];
 export type RegionOut = S["RegionOut"];
 export type RegionIn = S["RegionIn"];
 export type RegionsOut = S["RegionsOut"];
-export type Label = RegionOut["label"];
+export type Label = RegionOut["label"] | "canopy" | "louvers" | "compound_wall";
 export type Point = [number, number];
 export type ScaleOut = S["ScaleOut"];
 export type ScaleConfirm = S["ScaleConfirm"];
@@ -42,7 +42,7 @@ export type AICallOut = S["AICallOut"];
 export type ScaleResult = S["ScaleResult"];
 export type MaterialCategory = MaterialOut["category"];
 
-/** Body of a plain-language error (`ApiError` in app/domain/api.py). */
+/** Body of a plain-language error (`ApiError` in renocore/schemas/contracts.py). */
 export interface ApiErrorBody {
   code: string;
   message: string;

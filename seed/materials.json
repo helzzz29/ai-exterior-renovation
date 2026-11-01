@@ -4,18 +4,38 @@
     "name": "Economy exterior emulsion",
     "category": "paint",
     "description": "Budget-friendly smooth exterior paint for a fresh, clean look. Good for sheltered walls and quick refreshes.",
-    "applicable_labels": ["wall", "parapet", "pillar", "balcony", "roof_edge"],
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
     "pricing_unit": "litre",
     "measure_basis": "area",
     "coverage_sqft_per_unit": 130,
     "coats": 2,
     "pack_size": 10,
-    "pack_sizes": [1, 4, 10, 20],
+    "pack_sizes": [
+      1,
+      4,
+      10,
+      20
+    ],
     "wastage_pct": 5,
     "material_rate": 240,
     "labour_rate": 12,
     "companions": [
-      {"kind": "primer", "name": "Exterior primer", "unit": "litre", "quantity_per_sqft": 0.008333333333333333, "pack_size": 4, "rate": 250}
+      {
+        "kind": "primer",
+        "name": "Exterior primer",
+        "unit": "litre",
+        "quantity_per_sqft": 0.008333333333333333,
+        "pack_size": 4,
+        "rate": 250
+      }
     ],
     "colorable": true,
     "default_color": "#EFE6D2",
@@ -29,18 +49,38 @@
     "name": "Premium exterior emulsion",
     "category": "paint",
     "description": "Smooth, rich exterior paint with good colour hold and resistance to fungus and dirt.",
-    "applicable_labels": ["wall", "parapet", "pillar", "balcony", "roof_edge"],
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
     "pricing_unit": "litre",
     "measure_basis": "area",
     "coverage_sqft_per_unit": 110,
     "coats": 2,
     "pack_size": 4,
-    "pack_sizes": [1, 4, 10, 20],
+    "pack_sizes": [
+      1,
+      4,
+      10,
+      20
+    ],
     "wastage_pct": 5,
     "material_rate": 420,
     "labour_rate": 14,
     "companions": [
-      {"kind": "primer", "name": "Exterior primer", "unit": "litre", "quantity_per_sqft": 0.008333333333333333, "pack_size": 4, "rate": 250}
+      {
+        "kind": "primer",
+        "name": "Exterior primer",
+        "unit": "litre",
+        "quantity_per_sqft": 0.008333333333333333,
+        "pack_size": 4,
+        "rate": 250
+      }
     ],
     "colorable": true,
     "default_color": "#E8D9B5",
@@ -54,18 +94,38 @@
     "name": "Weatherproof elastomeric paint",
     "category": "paint",
     "description": "Thick, stretchy coating that bridges fine cracks and keeps rain out. Best for walls that face heavy monsoon rain.",
-    "applicable_labels": ["wall", "parapet", "pillar", "balcony", "roof_edge"],
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
     "pricing_unit": "litre",
     "measure_basis": "area",
     "coverage_sqft_per_unit": 120,
     "coats": 2,
     "pack_size": 10,
-    "pack_sizes": [1, 4, 10, 20],
+    "pack_sizes": [
+      1,
+      4,
+      10,
+      20
+    ],
     "wastage_pct": 5,
     "material_rate": 560,
     "labour_rate": 16,
     "companions": [
-      {"kind": "primer", "name": "Exterior primer", "unit": "litre", "quantity_per_sqft": 0.008333333333333333, "pack_size": 4, "rate": 250}
+      {
+        "kind": "primer",
+        "name": "Exterior primer",
+        "unit": "litre",
+        "quantity_per_sqft": 0.008333333333333333,
+        "pack_size": 4,
+        "rate": 250
+      }
     ],
     "colorable": true,
     "default_color": "#D9CBB0",
@@ -79,7 +139,15 @@
     "name": "Textured wall finish",
     "category": "texture",
     "description": "Cement-based textured coat that gives the wall a grainy, hand-finished look and hides small surface flaws.",
-    "applicable_labels": ["wall", "parapet", "pillar", "balcony", "roof_edge"],
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
     "pricing_unit": "kg",
     "measure_basis": "area",
     "coverage_sqft_per_unit": 10,
@@ -101,7 +169,15 @@
     "name": "Roller texture paint",
     "category": "texture",
     "description": "Thick paint rolled on to create a soft, even pattern. A textured look at a lower cost than a full texture coat.",
-    "applicable_labels": ["wall", "parapet", "pillar", "balcony", "roof_edge"],
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
     "pricing_unit": "kg",
     "measure_basis": "area",
     "coverage_sqft_per_unit": 12,
@@ -111,7 +187,14 @@
     "material_rate": 85,
     "labour_rate": 22,
     "companions": [
-      {"kind": "primer", "name": "Exterior primer", "unit": "litre", "quantity_per_sqft": 0.008333333333333333, "pack_size": 4, "rate": 250}
+      {
+        "kind": "primer",
+        "name": "Exterior primer",
+        "unit": "litre",
+        "quantity_per_sqft": 0.008333333333333333,
+        "pack_size": 4,
+        "rate": 250
+      }
     ],
     "colorable": true,
     "default_color": "#E2D4BC",
@@ -121,11 +204,46 @@
     "maintenance": "Wash with water once a year; repaint over it when it starts to fade."
   },
   {
+    "id": "texture-trowel-rustic",
+    "name": "Rustic trowel plaster finish",
+    "category": "texture",
+    "description": "Heavy sand-faced trowel texture with deep aggregate grain. Conceals rough plaster and undulations on exterior walls.",
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
+    "pricing_unit": "kg",
+    "measure_basis": "area",
+    "coverage_sqft_per_unit": 8,
+    "coats": 1,
+    "pack_size": 25,
+    "wastage_pct": 10,
+    "material_rate": 48,
+    "labour_rate": 35,
+    "companions": [],
+    "colorable": true,
+    "default_color": "#D5C8B4",
+    "swatch": "texture-trowel-rustic.png",
+    "weather_resistance": "high",
+    "durability": "10-12 years",
+    "maintenance": "Wash every couple of years with a soft water spray; recoatable with exterior emulsion."
+  },
+  {
     "id": "cladding-natural-stone",
     "name": "Natural stone cladding",
     "category": "cladding",
     "description": "Real split stone fixed to the wall for a rugged, natural look that lasts for decades.",
-    "applicable_labels": ["wall", "pillar", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
     "pricing_unit": "sqft",
     "measure_basis": "area",
     "coats": 1,
@@ -144,7 +262,12 @@
     "name": "Brick cladding (brick slips)",
     "category": "cladding",
     "description": "Thin real-brick tiles that give an exposed-brick look without rebuilding the wall.",
-    "applicable_labels": ["wall", "pillar", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
     "pricing_unit": "sqft",
     "measure_basis": "area",
     "coats": 1,
@@ -152,7 +275,14 @@
     "material_rate": 95,
     "labour_rate": 40,
     "companions": [
-      {"kind": "adhesive", "name": "Tile adhesive", "unit": "kg", "quantity_per_sqft": 0.5, "pack_size": 20, "rate": 22}
+      {
+        "kind": "adhesive",
+        "name": "Tile adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.5,
+        "pack_size": 20,
+        "rate": 22
+      }
     ],
     "colorable": false,
     "swatch": "cladding-brick-slips.png",
@@ -161,11 +291,49 @@
     "maintenance": "Clear water-repellent coat every 3-4 years keeps the bricks from absorbing rain."
   },
   {
+    "id": "cladding-granite-slabs",
+    "name": "Natural granite stone cladding",
+    "category": "cladding",
+    "description": "Polished or flamed natural granite stone slabs. Zero water absorption, high impact resistance, perfect for plinths, entrance pillars, and accent walls.",
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
+    "pricing_unit": "sqft",
+    "measure_basis": "area",
+    "coats": 1,
+    "wastage_pct": 10,
+    "material_rate": 180,
+    "labour_rate": 65,
+    "companions": [
+      {
+        "kind": "adhesive",
+        "name": "Tile & stone adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.5,
+        "pack_size": 20,
+        "rate": 28
+      }
+    ],
+    "colorable": false,
+    "swatch": "cladding-granite-slabs.png",
+    "weather_resistance": "high",
+    "durability": "25+ years",
+    "maintenance": "Hose down with water as needed; virtually indestructible and zero maintenance."
+  },
+  {
     "id": "tiles-slate-stone",
     "name": "Slate stone wall tiles",
     "category": "tiles",
     "description": "Natural slate tiles (1 × 2 ft) with a layered, earthy texture in grey and rust tones.",
-    "applicable_labels": ["wall", "pillar", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
     "pricing_unit": "piece",
     "measure_basis": "area",
     "coats": 1,
@@ -175,7 +343,14 @@
     "material_rate": 140,
     "labour_rate": 40,
     "companions": [
-      {"kind": "adhesive", "name": "Tile adhesive", "unit": "kg", "quantity_per_sqft": 0.5, "pack_size": 20, "rate": 22}
+      {
+        "kind": "adhesive",
+        "name": "Tile adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.5,
+        "pack_size": 20,
+        "rate": 22
+      }
     ],
     "colorable": false,
     "swatch": "tiles-slate-stone.png",
@@ -188,7 +363,12 @@
     "name": "Ceramic exterior wall tiles",
     "category": "tiles",
     "description": "Glazed ceramic tiles (1 × 2 ft) that are easy to clean and come in many colours and patterns.",
-    "applicable_labels": ["wall", "pillar", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
     "pricing_unit": "piece",
     "measure_basis": "area",
     "coats": 1,
@@ -198,7 +378,14 @@
     "material_rate": 80,
     "labour_rate": 35,
     "companions": [
-      {"kind": "adhesive", "name": "Tile adhesive", "unit": "kg", "quantity_per_sqft": 0.45, "pack_size": 20, "rate": 22}
+      {
+        "kind": "adhesive",
+        "name": "Tile adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.45,
+        "pack_size": 20,
+        "rate": 22
+      }
     ],
     "colorable": false,
     "swatch": "tiles-ceramic-exterior.png",
@@ -211,7 +398,12 @@
     "name": "Vitrified exterior wall tiles",
     "category": "tiles",
     "description": "Dense, very hard tiles (2 × 2 ft) that barely absorb water. A sleek, modern look.",
-    "applicable_labels": ["wall", "pillar", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
     "pricing_unit": "piece",
     "measure_basis": "area",
     "coats": 1,
@@ -221,7 +413,14 @@
     "material_rate": 220,
     "labour_rate": 45,
     "companions": [
-      {"kind": "adhesive", "name": "Tile adhesive", "unit": "kg", "quantity_per_sqft": 0.5, "pack_size": 20, "rate": 22}
+      {
+        "kind": "adhesive",
+        "name": "Tile adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.5,
+        "pack_size": 20,
+        "rate": 22
+      }
     ],
     "colorable": false,
     "swatch": "tiles-vitrified-exterior.png",
@@ -230,11 +429,50 @@
     "maintenance": "Very low; wash occasionally. Hard to repair if a tile chips, so keep a few spares."
   },
   {
+    "id": "tiles-terracotta-clay",
+    "name": "Terracotta clay wall tiles",
+    "category": "tiles",
+    "description": "Natural kiln-fired terracotta clay facade tiles. Provides natural heat insulation and an earthy, timeless brick-red look.",
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "balcony",
+      "compound_wall"
+    ],
+    "pricing_unit": "sqft",
+    "measure_basis": "area",
+    "coats": 1,
+    "wastage_pct": 10,
+    "material_rate": 125,
+    "labour_rate": 45,
+    "companions": [
+      {
+        "kind": "adhesive",
+        "name": "Tile adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.4,
+        "pack_size": 20,
+        "rate": 22
+      }
+    ],
+    "colorable": false,
+    "swatch": "tiles-terracotta-clay.png",
+    "weather_resistance": "high",
+    "durability": "15-20 years",
+    "maintenance": "Wash with water once a year; develops a warm natural patina over time."
+  },
+  {
     "id": "panel-acp",
     "name": "Aluminium composite panels (ACP)",
     "category": "panel",
     "description": "Flat, light metal-faced panels (8 × 4 ft sheets) on a frame, for a clean, modern front.",
-    "applicable_labels": ["wall", "balcony", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "parapet",
+      "canopy",
+      "louvers"
+    ],
     "pricing_unit": "sheet",
     "measure_basis": "area",
     "coats": 1,
@@ -255,7 +493,13 @@
     "name": "Exterior laminate panels (HPL)",
     "category": "panel",
     "description": "Tough, weatherproof laminate sheets (8 × 4 ft), often in wood-grain finishes.",
-    "applicable_labels": ["wall", "balcony", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "parapet",
+      "canopy",
+      "louvers"
+    ],
     "pricing_unit": "sheet",
     "measure_basis": "area",
     "coats": 1,
@@ -275,7 +519,13 @@
     "name": "Wood-look louvers (WPC)",
     "category": "panel",
     "description": "Slatted wood-plastic strips (sold as 9.5 × 0.5 ft panels) that look like timber but do not rot.",
-    "applicable_labels": ["wall", "balcony", "parapet"],
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "parapet",
+      "canopy",
+      "louvers"
+    ],
     "pricing_unit": "sheet",
     "measure_basis": "area",
     "coats": 1,
@@ -291,11 +541,66 @@
     "maintenance": "Wash once a year; colour may lighten slowly in strong sun."
   },
   {
+    "id": "panel-fluted-charcoal",
+    "name": "Fluted exterior wall panels",
+    "category": "panel",
+    "description": "Heavy-duty vertical fluted composite panels (8 × 4 ft sheets). Creates striking 3D slatted lines and shadow play on modern elevations.",
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "parapet",
+      "canopy",
+      "louvers"
+    ],
+    "pricing_unit": "sheet",
+    "measure_basis": "area",
+    "coats": 1,
+    "piece_area_sqft": 32,
+    "wastage_pct": 10,
+    "material_rate": 4200,
+    "labour_rate": 95,
+    "companions": [],
+    "colorable": false,
+    "swatch": "panel-fluted-charcoal.png",
+    "weather_resistance": "high",
+    "durability": "15-20 years",
+    "maintenance": "Wipe with a damp cloth; 100% waterproof and termite-proof."
+  },
+  {
+    "id": "panel-cnc-jali",
+    "name": "CNC geometric jali panels",
+    "category": "panel",
+    "description": "Laser-cut architectural lattice panels (8 × 4 ft sheets) in durable composite/ACP. Adds privacy, ventilation, and ornamental Indian detailing.",
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "canopy",
+      "louvers",
+      "compound_wall"
+    ],
+    "pricing_unit": "sheet",
+    "measure_basis": "area",
+    "coats": 1,
+    "piece_area_sqft": 32,
+    "wastage_pct": 10,
+    "material_rate": 3900,
+    "labour_rate": 85,
+    "companions": [],
+    "colorable": true,
+    "default_color": "#E5E7EB",
+    "swatch": "panel-cnc-jali.png",
+    "weather_resistance": "high",
+    "durability": "12-15 years",
+    "maintenance": "Dust with a soft brush; wash with mild soap water once a year."
+  },
+  {
     "id": "railing-toughened-glass",
     "name": "Toughened glass railing",
     "category": "railing",
     "description": "Clear safety-glass panels with steel fittings. Keeps the view open and looks modern.",
-    "applicable_labels": ["railing"],
+    "applicable_labels": [
+      "railing"
+    ],
     "pricing_unit": "rft",
     "measure_basis": "length",
     "coats": 1,
@@ -314,7 +619,9 @@
     "name": "Mild steel railing (painted)",
     "category": "railing",
     "description": "Classic welded steel bars, painted in a colour of your choice. Strong and affordable.",
-    "applicable_labels": ["railing"],
+    "applicable_labels": [
+      "railing"
+    ],
     "pricing_unit": "rft",
     "measure_basis": "length",
     "coats": 1,
@@ -334,7 +641,9 @@
     "name": "Stainless steel railing",
     "category": "railing",
     "description": "Brushed stainless steel posts and rails that do not rust and need no painting.",
-    "applicable_labels": ["railing"],
+    "applicable_labels": [
+      "railing"
+    ],
     "pricing_unit": "rft",
     "measure_basis": "length",
     "coats": 1,
@@ -353,7 +662,9 @@
     "name": "Fabricated steel gate",
     "category": "gate",
     "description": "Made-to-measure mild steel gate with a frame and bars, painted to match the house.",
-    "applicable_labels": ["gate"],
+    "applicable_labels": [
+      "gate"
+    ],
     "pricing_unit": "sqft",
     "measure_basis": "area",
     "coats": 1,

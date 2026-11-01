@@ -26,23 +26,33 @@ function PartShape({
   interactive: boolean;
   onSelect: () => void;
 }) {
-  const colour = labelColour(part.label);
+  const isExcluded = !!part.excluded;
+  const colour = isExcluded ? "#64748b" : labelColour(part.label);
   const pending = isPending(part);
   const amber = part.needsCheck && !part.checked;
   const [bx, by] = topLeft(part.polygon);
-  const badge = amber ? copy.parts.pleaseCheck : part.proposed ? copy.parts.suggestion : null;
+  const badge = amber
+    ? copy.parts.pleaseCheck
+    : part.proposed
+    ? copy.parts.suggestion
+    : isExcluded
+    ? "Keep As-Is"
+    : null;
   const badgeW = badge ? Math.ceil(badge.length * 7.6 + 18) : 0;
   return (
     <Group>
       <Line
         points={flat(part.polygon)}
         closed
-        // Translucent fill, stronger when selected; suggestions are only outlined lightly.
-        fill={hexToRgba(colour, part.proposed ? 0.12 : selected ? 0.45 : pending ? 0.3 : 0.22)}
-        stroke={amber ? CHECK_COLOUR : colour}
+        // Translucent fill, stronger when selected; suggestions and excluded are softer.
+        fill={hexToRgba(
+          colour,
+          isExcluded ? 0.08 : part.proposed ? 0.12 : selected ? 0.45 : pending ? 0.3 : 0.22,
+        )}
+        stroke={amber ? CHECK_COLOUR : isExcluded ? "#94a3b8" : colour}
         strokeWidth={selected ? 4 : amber ? 3.5 : 2}
         strokeScaleEnabled={false}
-        dash={part.proposed ? [12, 8] : undefined}
+        dash={part.proposed ? [12, 8] : isExcluded ? [6, 6] : undefined}
         listening={interactive}
         onClick={onSelect}
         onTap={onSelect}
@@ -50,7 +60,14 @@ function PartShape({
       />
       {badge && (
         <Group x={bx} y={by} scaleX={1 / scale} scaleY={1 / scale} listening={interactive} onClick={onSelect} onTap={onSelect}>
-          <Rect x={4} y={4} width={badgeW} height={24} cornerRadius={12} fill={amber ? CHECK_COLOUR : "#0f766e"} />
+          <Rect
+            x={4}
+            y={4}
+            width={badgeW}
+            height={24}
+            cornerRadius={12}
+            fill={amber ? CHECK_COLOUR : isExcluded ? "#475569" : "#0f766e"}
+          />
           <Text x={4} y={9} width={badgeW} align="center" text={badge} fontSize={13} fontStyle="bold" fill="#fff" />
         </Group>
       )}

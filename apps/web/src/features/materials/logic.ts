@@ -61,7 +61,7 @@ export function assignGroup(
   return [...rest, ...regionIds.map((region_id) => ({ region_id, material_id: materialId, color }))];
 }
 
-/** Swatches offered for paint and texture. Names match the report (apps/api app/reports/colours.py). */
+/** Swatches offered for paint and texture. Names match the report (apps/api renocore/exports/palette.py). */
 export const COLOUR_PRESETS = [
   { hex: "#f5f0e6", name: "Off-white" },
   { hex: "#e9dcc0", name: "Warm beige" },

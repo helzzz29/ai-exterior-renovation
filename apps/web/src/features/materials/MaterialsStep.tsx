@@ -1,5 +1,5 @@
 import { type CSSProperties, type KeyboardEvent, useEffect, useRef, useState } from "react";
-import { Check, ChevronDown, Eye, EyeOff, Info, Sparkles, ThumbsUp, TriangleAlert } from "lucide-react";
+import { Check, ChevronDown, Eye, EyeOff, Info, Sparkles, ThumbsUp, TriangleAlert, X } from "lucide-react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
@@ -213,6 +213,23 @@ function GroupSection({
       </h3>
       {open && (
         <div id={panelId} className="space-y-3 border-t px-4 pt-3 pb-4">
+          {choice && chosen && (
+            <div className="flex items-center justify-between rounded-xl border border-primary/30 bg-primary/10 px-3.5 py-2 text-xs">
+              <div className="flex items-center gap-2 min-w-0">
+                <Check className="size-4 shrink-0 text-primary" />
+                <span className="truncate font-bold text-foreground">Selected: {chosen.name}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => pick(null)}
+                className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-destructive/30 bg-destructive/10 px-2 py-1 text-xs font-bold text-destructive hover:bg-destructive/20 transition-colors"
+                title="Remove selection"
+              >
+                <X className="size-3.5" />
+                <span>Remove Selection</span>
+              </button>
+            </div>
+          )}
           <p className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
             <Info className="mt-px size-3.5 shrink-0 text-primary" aria-hidden="true" />
             {copy.materials.appliesTo(group.regionIds.length)}
@@ -252,6 +269,16 @@ function GroupSection({
               />
             ))}
           </div>
+          {choice && (
+            <button
+              type="button"
+              onClick={() => pick(null)}
+              className="inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-destructive/30 px-3 text-sm font-medium text-destructive outline-none hover:bg-destructive-soft focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <X className="size-4" aria-hidden="true" />
+              {copy.materials.removeChoice}
+            </button>
+          )}
           {chosen?.colorable && (
             <fieldset className="space-y-2.5 rounded-lg border bg-paper/50 p-3">
               <legend className="px-1 text-sm font-semibold">{copy.materials.colour}</legend>

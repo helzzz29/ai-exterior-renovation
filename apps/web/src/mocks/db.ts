@@ -135,9 +135,18 @@ const STORAGE_KEY = "home-makeover-mock-db-v1";
 
 export const DEMO_USER = { email: "demo@example.com", password: "password123" };
 
+export const SEED_ACCOUNTS: MUser[] = [
+  { id: "u-user1", email: "user1@example.com", password: "User1@12345" },
+  { id: "u-user2", email: "user2@example.com", password: "User2@12345" },
+  { id: "u-user3", email: "user3@example.com", password: "User3@12345" },
+  { id: "u-admin", email: "admin@example.com", password: "Admin@12345" },
+  { id: "u-demo", email: "demo@example.com", password: "password123" },
+  { id: "u-user", email: "user@example.com", password: "User@12345" },
+];
+
 function fresh(): DB {
   return {
-    users: [{ id: "u-demo", ...DEMO_USER }],
+    users: [...SEED_ACCOUNTS],
     sessionUserId: null,
     projects: [],
     designs: [],

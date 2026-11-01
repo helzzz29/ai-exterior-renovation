@@ -521,8 +521,11 @@ export const handlers = [
     let name = "photo.jpg";
     let type = "image/jpeg";
     try {
-      const form = await request.formData();
-      const file = form.get("file");
+      const form = await Promise.race([
+        request.formData(),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 100)),
+      ]);
+      const file = form?.get("file");
       if (file && typeof file === "object" && "name" in file) {
         name = (file as File).name || name;
         type = (file as File).type || type;
@@ -782,7 +785,7 @@ export const handlers = [
     const found = r ? ownDesign(r.designId) : null;
     if (!r || !found) return currentUser() ? notFound() : unauthorised();
     if (r.status !== "ready" && r.status !== "accepted") {
-      return err(409, "not_ready", "Your new look isn't ready yet.");
+      return err(409, "not_ready", "Your makeover isn't ready yet.");
     }
     for (const other of db.renders.filter((x) => x.designId === r.designId && x.status === "accepted")) {
       other.status = "ready";

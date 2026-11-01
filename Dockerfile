@@ -40,4 +40,4 @@ ENV ENV=prod \
 ENV MALLOC_ARENA_MAX=2
 EXPOSE 8000
 # database migrations run on every start (a no-op when already up to date)
-CMD ["sh", "-c", "alembic upgrade head && exec python -m app.main"]
+CMD ["sh", "-c", "alembic upgrade head && exec python -m renocore.server"]

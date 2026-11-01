@@ -5,7 +5,7 @@ import { db } from "@/mocks/db";
 import { expectPlainLanguage, location, renderApp, seed } from "./helpers";
 import { server } from "./server";
 
-describe("Step 2: Parts of your house", () => {
+describe("Step 2: Spot the sections", () => {
   it("shows the unsure parts, the counter and a locked Continue", async () => {
     const { projectId } = await seed("regions");
     renderApp(`/projects/${projectId}/parts`);

@@ -74,7 +74,7 @@ function StepItem({
   );
   const base =
     layout === "row"
-      ? "flex h-full items-center gap-2.5 rounded-lg px-2 py-2 xl:px-3"
+      ? cn("flex h-full items-center gap-2.5 rounded-xl border px-2.5 py-2.5 transition-colors xl:px-3", current ? "border-primary/40 bg-card shadow-card" : "border-transparent")
       : "flex items-center gap-3 rounded-lg px-3 py-2.5";
   if (status === "locked") {
     return (
@@ -91,14 +91,14 @@ function StepItem({
       to={`/projects/${projectId}/${step.slug}${search}`}
       aria-current={current ? "step" : undefined}
       onClick={onNavigate}
-      className={cn(base, current ? "bg-accent" : "text-foreground/85 hover:bg-muted hover:text-foreground")}
+      className={cn(base, current ? "" : "text-foreground/85 hover:bg-card/70 hover:text-foreground")}
     >
       {inner}
     </Link>
   );
 }
 
-/** The six steps. Wide screens: one row. Phones: "Step 4 of 6 · Choose materials" that opens the list. */
+/** The six steps. Wide screens: one row. Phones: "Step 4 of 6 · Pick finishes" that opens the list. */
 function Stepper({ projectId, current, statuses }: { projectId: string; current: number; statuses: StepStatus[] }) {
   const { search } = useLocation();
   const [open, setOpen] = useState(false);
@@ -154,7 +154,7 @@ function Stepper({ projectId, current, statuses }: { projectId: string; current:
         )}
       </div>
       {/* full row, from 1024 px */}
-      <ol className="hidden grid-cols-6 gap-1 rounded-xl border bg-card p-1.5 shadow-card lg:grid">
+      <ol className="hidden grid-cols-6 gap-2 rounded-2xl bg-muted/60 p-1.5 lg:grid">
         {STEPS.map((s) => (
           <li key={s.slug} className="min-w-0">
             <StepItem
@@ -250,6 +250,20 @@ export function WizardLayout() {
         </div>
         <Stepper projectId={p.id} current={current} statuses={statuses} />
       </div>
+      <section aria-label="What to do now" className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-blue-200/80 bg-blue-50/70 px-4 py-3.5 shadow-xs">
+        <div className="min-w-0 flex-1 basis-64">
+          <p className="text-xs font-semibold tracking-wide text-primary uppercase">
+            {copy.stepper.stepOf(current + 1, STEPS.length)} · {STEPS[current].title}
+          </p>
+          <p className="mt-0.5 text-sm text-foreground/90">{copy.stepper.hints[current]}</p>
+        </div>
+        <div className="w-full max-w-48 sm:w-48" aria-hidden="true">
+          <div className="h-2 overflow-hidden rounded-full bg-border">
+            <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${((current + 1) / STEPS.length) * 100}%` }} />
+          </div>
+          <p className="mt-1 text-right text-[11px] text-muted-foreground">{Math.round(((current + 1) / STEPS.length) * 100)}% of the way</p>
+        </div>
+      </section>
       <NeedsUpdateBanner message={message} projectId={p.id} current={currentSlug} />
       <Outlet context={ctx} />
       <TracePanel projectId={p.id} refreshKey={`${p.updated_at}|${p.stage}|${active?.render?.id ?? ""}|${active?.render?.status ?? ""}`} />

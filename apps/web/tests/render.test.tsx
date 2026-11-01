@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { db } from "@/mocks/db";
 import { call, expectPlainLanguage, renderApp, seed } from "./helpers";
 
-describe("Step 5: Your new look", () => {
+describe("Step 5: Makeover preview", () => {
   it("shows progress while the look is being created, then the before/after slider", async () => {
     const { projectId, designId } = await seed("assigned");
     await call("POST", `/api/designs/${designId}/render`, { note: null });

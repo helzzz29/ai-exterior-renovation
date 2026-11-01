@@ -1,12 +1,11 @@
 import { type Dispatch, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Lock } from "lucide-react";
 import type { Label } from "@/api/types";
 import { copy } from "@/copy";
 import { Badge } from "@/components/ui/badge";
-import { friendlyName, LABEL_STYLES, LABELS } from "@/lib/labels";
+import { elementRequirementBadge, friendlyName, LABEL_STYLES, LABELS } from "@/lib/labels";
 import { cn } from "@/lib/utils";
 import { type DraftPart, type EditorAction, isPending } from "./reducer";
-
 
 export interface PartRow {
   label: Label;
@@ -31,15 +30,18 @@ function Chip({
   name,
   selected,
   onSelect,
+  showRequirement = false,
 }: {
   part: DraftPart;
   name: string;
   selected: boolean;
   onSelect: () => void;
+  showRequirement?: boolean;
 }) {
   const Icon = LABEL_STYLES[part.label].icon;
   // A "Please check" question and a suggestion look different: amber and solid vs teal and dashed, each with its own word.
   const question = part.needsCheck && !part.checked && !part.proposed;
+  const reqBadge = elementRequirementBadge(part.label);
   return (
     <button
       type="button"
@@ -49,11 +51,20 @@ function Chip({
         "flex min-h-10 items-center gap-1.5 rounded-full border bg-card px-3 py-1 text-sm transition-colors hover:bg-muted sm:min-h-8",
         question && "border-warning bg-warning-soft/40",
         part.proposed && "border-2 border-dashed border-primary/60",
+        part.excluded && "border-dashed border-amber-300/80 bg-amber-50/40 text-slate-600",
         selected && "border-primary bg-accent ring-2 ring-primary/25",
       )}
     >
       <Icon className="size-3.5 shrink-0" style={{ color: LABEL_STYLES[part.label].colour }} aria-hidden="true" />
-      {name}
+      <span className={cn(part.excluded && "line-through opacity-80")}>{name}</span>
+      {part.excluded && (
+        <span aria-hidden="true">
+          <Badge variant="outline" className="border-amber-300 bg-amber-50 text-amber-800 text-[10px] py-0 px-1.5">
+            <Lock className="size-2.5 mr-0.5 inline" />
+            Kept As-Is
+          </Badge>
+        </span>
+      )}
       {question && (
         <Badge variant="warning" className="ml-0.5 px-1.5 py-0 text-[11px]">
           {copy.parts.pleaseCheck}
@@ -63,6 +74,13 @@ function Chip({
         <Badge variant="info" className="ml-0.5 px-1.5 py-0 text-[11px]">
           {copy.parts.suggestion}
         </Badge>
+      )}
+      {showRequirement && !question && !part.proposed && !part.excluded && (
+        <span aria-hidden="true">
+          <Badge variant={reqBadge.variant} className={cn("ml-1 py-0 px-1.5 text-[10px]", reqBadge.className)}>
+            {reqBadge.label}
+          </Badge>
+        </span>
       )}
     </button>
   );
@@ -103,11 +121,12 @@ export function PartsList({
         {rows.map((row) => {
           const Icon = LABEL_STYLES[row.label].icon;
           const name = friendlyName(row.label);
+          const reqBadge = elementRequirementBadge(row.label);
           if (row.parts.length === 1) {
             const p = row.parts[0];
             return (
               <li key={row.label}>
-                <Chip part={p} name={name} selected={selectedKey === p.key} onSelect={() => select(p.key)} />
+                <Chip part={p} name={name} selected={selectedKey === p.key} onSelect={() => select(p.key)} showRequirement />
               </li>
             );
           }
@@ -122,7 +141,12 @@ export function PartsList({
               >
                 <Icon className="size-3.5" style={{ color: LABEL_STYLES[row.label].colour }} aria-hidden="true" />
                 <span className="flex-1">{copy.parts.groupRow(name, row.parts.length)}</span>
-                <ChevronDown className={cn("size-4 transition-transform", expanded && "rotate-180")} aria-hidden="true" />
+                <span aria-hidden="true">
+                  <Badge variant={reqBadge.variant} className={cn("text-[10px] py-0 px-1.5 mr-1", reqBadge.className)}>
+                    {reqBadge.label}
+                  </Badge>
+                </span>
+                <ChevronDown className={cn("size-4 transition-transform text-slate-400", expanded && "rotate-180")} aria-hidden="true" />
               </button>
               {expanded && (
                 <ul className="flex flex-wrap gap-1.5 pl-3">

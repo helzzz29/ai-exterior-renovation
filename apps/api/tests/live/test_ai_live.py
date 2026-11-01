@@ -10,11 +10,11 @@ from pathlib import Path
 
 import pytest
 
-from app import imaging
-from app.ai import RealProvider, apply_labels, photo_verdict, render_design
-from app.config import ROOT_DIR, get_settings
-from app.domain.ai import AICallRecord
-from app.domain.models import Assignment, Material, Region
+from renocore import pixels
+from renocore.schemas.entities import Assignment, Material, Region
+from renocore.schemas.vision_io import AICallRecord
+from renocore.settings import ROOT_DIR, get_settings
+from renocore.vision import RealProvider, apply_labels, photo_verdict, render_design
 
 pytestmark = pytest.mark.live
 
@@ -77,7 +77,7 @@ def load_materials() -> dict[str, Material]:
 
 
 def working(path: Path):
-    return imaging.make_working_copy(imaging.load_upload(path.read_bytes()))
+    return pixels.make_working_copy(pixels.load_upload(path.read_bytes()))
 
 
 @pytest.fixture(scope="module")
@@ -97,7 +97,7 @@ async def test_c1_whole_photo(provider_and_recorder, sample):
     if answers.main_door is not None:
         b = answers.main_door.box
         assert 0 <= b.left < b.right <= 1 and 0 <= b.top < b.bottom <= 1
-    verdict = photo_verdict(imaging.check_photo(photo), answers)
+    verdict = photo_verdict(pixels.check_photo(photo), answers)
     assert verdict.status in {"pass", "warn", "reject"}
     assert recorder.calls[-1].step == "C1" and recorder.calls[-1].error is None
 

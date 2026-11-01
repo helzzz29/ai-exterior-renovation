@@ -1,5 +1,5 @@
 import { type Dispatch, useId, useState } from "react";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, ChevronDown, CircleHelp, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp, Check, ChevronDown, CircleHelp, Lock, Sparkles, Trash2, X } from "lucide-react";
 import type { Label, Point } from "@/api/types";
 import { copy } from "@/copy";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CHECK_COLOUR, friendlyName, LABEL_STYLES, LABELS, labelColour } from "@/lib/labels";
+import { CHECK_COLOUR, elementRequirementBadge, friendlyName, LABEL_STYLES, LABELS, labelColour } from "@/lib/labels";
 import { cn } from "@/lib/utils";
 import type { DraftPart, EditorAction } from "./reducer";
 
@@ -244,17 +244,60 @@ export function CornerNudge({
 /** A part that needs no answer: show what it is, let the user change, adjust or remove it. */
 export function SelectedCard({ part, dispatch, photoUrl, imgW, imgH, onRemove }: CardProps) {
   const Icon = LABEL_STYLES[part.label].icon;
+  const badge = elementRequirementBadge(part.label);
   return (
     <Card data-testid="selected-card" className="shadow-raised">
       <CardHeader className="pb-2 sm:pb-3">
-        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{copy.parts.selectedPart}</p>
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">{copy.parts.selectedPart}</p>
+          <Badge variant={badge.variant} className={badge.className}>
+            {badge.label}
+          </Badge>
+        </div>
         <CardTitle className="flex items-center gap-2">
           <Icon className="size-5" style={{ color: LABEL_STYLES[part.label].colour }} aria-hidden="true" />
-          {friendlyName(part.label)}
+          <span>{friendlyName(part.label)}</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <CropPreview photoUrl={photoUrl} polygon={part.polygon} imgW={imgW} imgH={imgH} colour={labelColour(part.label)} />
+
+        {/* Keep Existing / Exclude from Budget Toggle */}
+        <div
+          className={cn(
+            "flex items-center justify-between rounded-xl border p-2.5 transition-colors",
+            part.excluded ? "border-amber-200 bg-amber-50/70" : "border-slate-200 bg-slate-50/70",
+          )}
+        >
+          <div className="flex items-center gap-2">
+            <div
+              className={cn(
+                "flex size-7 shrink-0 items-center justify-center rounded-lg",
+                part.excluded ? "bg-amber-100 text-amber-700" : "bg-white text-slate-500 border border-slate-200",
+              )}
+            >
+              {part.excluded ? <Lock className="size-3.5" /> : <Sparkles className="size-3.5 text-blue-600" />}
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-800">
+                {part.excluded ? copy.parts.keepExisting : copy.parts.includeInBudget}
+              </p>
+              <p className="text-[11px] text-slate-500">
+                {part.excluded ? copy.parts.keepExistingHint : copy.parts.includeInBudgetHint}
+              </p>
+            </div>
+          </div>
+          <Button
+            type="button"
+            size="sm"
+            variant={part.excluded ? "default" : "outline"}
+            onClick={() => dispatch({ type: "toggleExclude", key: part.key })}
+            className={part.excluded ? "bg-amber-600 hover:bg-amber-700 text-white h-7 px-2.5 text-xs font-semibold" : "h-7 px-2.5 text-xs font-semibold"}
+          >
+            {part.excluded ? "Include" : "Keep As-Is"}
+          </Button>
+        </div>
+
         <CornerNudge part={part} dispatch={dispatch} imgW={imgW} imgH={imgH} />
       </CardContent>
       <CardFooter>

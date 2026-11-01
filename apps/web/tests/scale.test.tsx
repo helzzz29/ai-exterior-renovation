@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { db } from "@/mocks/db";
 import { expectPlainLanguage, location, renderApp, seed } from "./helpers";
 
-describe("Step 3: Size check", () => {
+describe("Step 3: Measure up", () => {
   it("medium: highlights the door, explains it and confirms with one click", async () => {
     const { projectId } = await seed("scale");
     const { user } = renderApp(`/projects/${projectId}/size`);
@@ -75,7 +75,7 @@ describe("Step 3: Size check", () => {
   it("after confirming, shows the size and a way to change it", async () => {
     const { projectId } = await seed("designing");
     renderApp(`/projects/${projectId}/size`);
-    expect(await screen.findByText("Size check done")).toBeInTheDocument();
+    expect(await screen.findByText("Measure up done")).toBeInTheDocument();
     expect(screen.getByText(/Your house is about 23 ft wide/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Change the measurement" })).toBeInTheDocument();
   });

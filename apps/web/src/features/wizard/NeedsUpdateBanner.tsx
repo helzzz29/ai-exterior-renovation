@@ -32,7 +32,7 @@ export function needsUpdateMessage(
   }
   if (project.stage !== "designing" || !active) return null;
   if (active.render?.stale) {
-    // "Your new look" shows its own out-of-date panel with a direct "create again" button.
+    // "Makeover preview" shows its own out-of-date panel with a direct "create again" button.
     return { text: copy.stale.look, action: copy.stale.lookAction, step: "materials", quietOn: ["look"] };
   }
   if (active.estimate_stale) {
