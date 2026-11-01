@@ -165,22 +165,6 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                   <House className="size-3 text-blue-600" />
                   Renova Studio
                 </span>
-                {isLogin && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setEmail(DEMO_HINT.email);
-                      setPassword(DEMO_HINT.password);
-                      setErrors({});
-                      setFormError(null);
-                    }}
-                    className="inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50/80 px-2 py-0.5 text-[11px] font-semibold text-blue-700 transition hover:bg-blue-100/80"
-                    title="Fill demo login credentials"
-                  >
-                    <Sparkles className="size-3 text-blue-600" />
-                    <span>Auto-fill Demo</span>
-                  </button>
-                )}
               </div>
 
               <h1 className="text-xl sm:text-2xl font-bold leading-tight tracking-tight text-slate-900">
