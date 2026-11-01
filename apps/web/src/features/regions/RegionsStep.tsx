@@ -14,7 +14,7 @@ import { ConfirmDialog } from "@/components/ui/dialog";
 import { Tooltip } from "@/components/ui/tooltip";
 import { ErrorState, PageSkeleton } from "@/components/states";
 import { AUTOSAVE_MS } from "@/lib/config";
-import { friendlyName, LABEL_STYLES, LABELS } from "@/lib/labels";
+import { elementRequirementBadge, friendlyName, LABEL_STYLES, LABELS } from "@/lib/labels";
 import { DESKTOP } from "@/lib/useMediaQuery";
 import { cn } from "@/lib/utils";
 import { BackLink } from "@/features/wizard/DesignBar";
@@ -173,6 +173,30 @@ export function RegionsStep() {
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_22.5rem]">
         <div className="min-w-0 space-y-3">
+          {/* Architectural Guide Banner */}
+          <div className="flex flex-wrap items-center gap-2 rounded-xl border border-blue-100 bg-blue-50/60 px-3.5 py-2.5 text-xs text-slate-700">
+            <span className="flex items-center gap-1.5 font-semibold text-blue-950">
+              <Info className="h-3.5 w-3.5 text-blue-600" aria-hidden="true" />
+              Section Guide:
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-md bg-blue-600 px-2 py-0.5 text-[10px] font-semibold text-white">
+                Mandatory
+              </span>
+              <span className="text-slate-600">Main Wall</span>
+              <span className="text-slate-300" aria-hidden="true">•</span>
+              <span className="inline-flex items-center rounded-md border border-slate-300 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-700">
+                Openings
+              </span>
+              <span className="text-slate-600">Windows & Doors (deducted)</span>
+              <span className="text-slate-300" aria-hidden="true">•</span>
+              <span className="inline-flex items-center rounded-md bg-slate-200/80 px-2 py-0.5 text-[10px] font-medium text-slate-700">
+                Optional
+              </span>
+              <span className="text-slate-600">Balcony, Canopy, Louvers, Compound Wall</span>
+            </div>
+          </div>
+
           <div
             role="toolbar"
             aria-label={copy.parts.toolbar}
@@ -259,15 +283,21 @@ export function RegionsStep() {
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {LABELS.map((l: Label) => {
                     const Icon = LABEL_STYLES[l].icon;
+                    const req = elementRequirementBadge(l);
                     return (
                       <Button
                         key={l}
                         variant="outline"
-                        className="h-auto min-h-11 justify-start px-3 py-2 text-left whitespace-normal"
+                        className="h-auto min-h-12 flex-col items-start gap-1 p-2.5 text-left whitespace-normal hover:border-blue-300 hover:bg-blue-50/30"
                         onClick={() => dispatch({ type: "labelNewPart", label: l })}
                       >
-                        <Icon style={{ color: LABEL_STYLES[l].colour }} aria-hidden="true" />
-                        {friendlyName(l)}
+                        <div className="flex w-full items-center gap-2">
+                          <Icon style={{ color: LABEL_STYLES[l].colour }} className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          <span className="flex-1 text-xs font-medium leading-tight">{friendlyName(l)}</span>
+                        </div>
+                        <span aria-hidden="true" className={cn("inline-block rounded px-1.5 py-0.5 text-[9px] leading-none", req.className)}>
+                          {req.label}
+                        </span>
                       </Button>
                     );
                   })}

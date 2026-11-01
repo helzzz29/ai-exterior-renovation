@@ -2287,7 +2287,10 @@
               "parapet",
               "railing",
               "gate",
-              "roof_edge"
+              "roof_edge",
+              "canopy",
+              "louvers",
+              "compound_wall"
             ],
             "title": "Label"
           },
@@ -2534,7 +2537,10 @@
                 "parapet",
                 "railing",
                 "gate",
-                "roof_edge"
+                "roof_edge",
+                "canopy",
+                "louvers",
+                "compound_wall"
               ]
             },
             "type": "array",
@@ -3213,7 +3219,10 @@
               "parapet",
               "railing",
               "gate",
-              "roof_edge"
+              "roof_edge",
+              "canopy",
+              "louvers",
+              "compound_wall"
             ],
             "title": "Label"
           },
@@ -3270,7 +3279,10 @@
               "parapet",
               "railing",
               "gate",
-              "roof_edge"
+              "roof_edge",
+              "canopy",
+              "louvers",
+              "compound_wall"
             ],
             "title": "Label"
           },
@@ -3714,7 +3726,10 @@
               "parapet",
               "railing",
               "gate",
-              "roof_edge"
+              "roof_edge",
+              "canopy",
+              "louvers",
+              "compound_wall"
             ],
             "title": "Label"
           },

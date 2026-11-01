@@ -56,7 +56,15 @@ def test_seed_label_rules(cat):
         if m.category == "gate":
             assert m.applicable_labels == ["gate"]
         if m.category in ("paint", "texture"):
-            assert set(m.applicable_labels) == {"wall", "parapet", "pillar", "balcony", "roof_edge"}
+            assert set(m.applicable_labels) == {
+                "wall",
+                "parapet",
+                "pillar",
+                "balcony",
+                "roof_edge",
+                "canopy",
+                "compound_wall",
+            }
         if m.category == "tiles":
             assert m.companions and m.companions[0].kind == "adhesive"
         if m.category == "paint":

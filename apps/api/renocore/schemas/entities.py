@@ -12,7 +12,18 @@ from pydantic import BaseModel, Field
 # ---------------------------------------------------------------- labels
 
 Label = Literal[
-    "wall", "window", "door", "balcony", "pillar", "parapet", "railing", "gate", "roof_edge"
+    "wall",
+    "window",
+    "door",
+    "balcony",
+    "pillar",
+    "parapet",
+    "railing",
+    "gate",
+    "roof_edge",
+    "canopy",
+    "louvers",
+    "compound_wall",
 ]
 LABELS: tuple[Label, ...] = (
     "wall",
@@ -24,6 +35,9 @@ LABELS: tuple[Label, ...] = (
     "railing",
     "gate",
     "roof_edge",
+    "canopy",
+    "louvers",
+    "compound_wall",
 )
 OPENING_LABELS: frozenset[str] = frozenset({"window", "door"})
 
@@ -33,10 +47,13 @@ LABEL_PRIORITY: tuple[Label, ...] = (
     "door",
     "railing",
     "gate",
+    "canopy",
+    "louvers",
     "balcony",
     "pillar",
     "parapet",
     "roof_edge",
+    "compound_wall",
     "wall",
 )
 
@@ -50,6 +67,9 @@ FRIENDLY_LABELS: dict[str, str] = {
     "railing": "Railing",
     "gate": "Gate",
     "roof_edge": "Roof edge",
+    "canopy": "Canopy / Chhajja",
+    "louvers": "Louvers / CNC Jali",
+    "compound_wall": "Compound / Boundary Wall",
 }
 
 Point = tuple[float, float]
