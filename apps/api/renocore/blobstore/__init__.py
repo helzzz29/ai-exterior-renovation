@@ -97,9 +97,16 @@ class S3Storage:
         )
 
     async def get(self, key: str) -> bytes:
+        from botocore.exceptions import ClientError
+
         def _read() -> bytes:
-            obj = self.client.get_object(Bucket=self.bucket, Key=_check_key(key))
-            return obj["Body"].read()
+            try:
+                obj = self.client.get_object(Bucket=self.bucket, Key=_check_key(key))
+                return obj["Body"].read()
+            except ClientError as exc:
+                if exc.response.get("Error", {}).get("Code") in ("404", "NoSuchKey", "NotFound"):
+                    raise FileNotFoundError(f"Storage key not found: {key}") from exc
+                raise
 
         return await asyncio.to_thread(_read)
 
@@ -128,9 +135,19 @@ def get_storage() -> Storage:
     global _storage
     if _storage is None:
         settings = get_settings()
-        if settings.storage_backend == "s3":
+        if (
+            settings.storage_backend == "s3"
+            and settings.s3_bucket
+            and settings.s3_access_key_id
+            and settings.s3_secret_access_key
+        ):
             _storage = S3Storage.from_settings(settings)
         else:
+            if settings.storage_backend == "s3":
+                import logging
+                logging.getLogger("renocore.blobstore").warning(
+                    "STORAGE_BACKEND is 's3' but s3_bucket, s3_access_key_id, or s3_secret_access_key is missing. Falling back to LocalStorage."
+                )
             _storage = LocalStorage(settings.storage_root)
     return _storage
 

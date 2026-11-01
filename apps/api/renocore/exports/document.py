@@ -230,10 +230,31 @@ def _styles() -> dict[str, ParagraphStyle]:
 def _image(data: bytes | None, max_w: float, max_h: float) -> Image | Paragraph:
     if not data:
         return Paragraph("(image not available)", _styles()["small"])
-    with PILImage.open(io.BytesIO(data)) as im:
-        w, h = im.size
-    ratio = min(max_w / w, max_h / h)
-    return Image(io.BytesIO(data), width=w * ratio, height=h * ratio)
+    try:
+        with PILImage.open(io.BytesIO(data)) as im:
+            try:
+                from PIL import ImageOps
+                im = ImageOps.exif_transpose(im)
+            except Exception:
+                pass
+
+            if im.mode not in ("RGB", "L"):
+                im = im.convert("RGB")
+
+            # Constrain raster size to ~1200px max edge to avoid high memory spikes in ReportLab
+            im.thumbnail((1200, 1200), PILImage.Resampling.LANCZOS)
+            out_io = io.BytesIO()
+            im.save(out_io, format="JPEG", quality=85)
+            out_bytes = out_io.getvalue()
+            w, h = im.size
+
+        if w <= 0 or h <= 0:
+            return Paragraph("(image not available)", _styles()["small"])
+
+        ratio = min(max_w / w, max_h / h)
+        return Image(io.BytesIO(out_bytes), width=w * ratio, height=h * ratio)
+    except Exception:
+        return Paragraph("(image not available)", _styles()["small"])
 
 
 def _table(
