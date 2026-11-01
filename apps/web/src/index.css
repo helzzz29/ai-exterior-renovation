@@ -2,27 +2,27 @@
 
 /*
  * Renova AI Theme:
- * Fresh, high-clarity Green & White architectural design system.
- * Pure white cards, crisp light canvas, vibrant emerald/forest green accents,
- * soft mint highlights, and refined readability.
+ * Fresh, high-clarity Blue & White architectural design system.
+ * Pure white cards, crisp light canvas, vibrant royal & sapphire blue accents,
+ * soft sky/ice blue highlights, and refined readability.
  */
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.985 0.005 160);      /* Clean light off-white (#f8fafc) */
-  --foreground: oklch(0.2 0.02 240);         /* Deep slate ink text (#0f172a) */
+  --background: oklch(0.985 0.005 240);      /* Clean light off-white (#f8fafc) */
+  --foreground: oklch(0.2 0.02 250);         /* Deep slate/navy ink text (#0f172a) */
   --card: oklch(1 0 0);                      /* Pure white (#ffffff) */
-  --card-foreground: oklch(0.2 0.02 240);
+  --card-foreground: oklch(0.2 0.02 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.02 240);
-  --primary: oklch(0.6 0.18 155);            /* Vibrant Emerald Green (#059669) */
-  --primary-hover: oklch(0.52 0.18 155);     /* Deep Emerald (#047857) */
+  --popover-foreground: oklch(0.2 0.02 250);
+  --primary: oklch(0.55 0.22 255);            /* Vibrant Architectural Blue (#2563eb) */
+  --primary-hover: oklch(0.48 0.22 255);     /* Deep Royal Blue (#1d4ed8) */
   --primary-foreground: oklch(0.99 0 0);     /* Crisp pure white */
-  --secondary: oklch(0.97 0.02 155);         /* Soft mint tint (#f0fdf4) */
-  --secondary-foreground: oklch(0.3 0.1 155);/* Forest green text (#065f46) */
+  --secondary: oklch(0.965 0.025 250);       /* Soft ice blue tint (#eff6ff) */
+  --secondary-foreground: oklch(0.35 0.15 255);/* Royal blue text (#1e40af) */
   --muted: oklch(0.96 0.006 240);            /* Light cool gray (#f1f5f9) */
   --muted-foreground: oklch(0.5 0.02 240);   /* Mid slate text (#64748b) */
-  --accent: oklch(0.95 0.035 155);           /* Emerald glow wash (#ecfdf5) */
-  --accent-foreground: oklch(0.28 0.1 155);  /* Deep emerald accent text */
+  --accent: oklch(0.95 0.04 250);            /* Sky blue wash (#dbeafe) */
+  --accent-foreground: oklch(0.32 0.16 255);  /* Deep blue accent text */
   --destructive: oklch(0.58 0.22 25);
   --destructive-soft: oklch(0.97 0.025 25);
   --destructive-foreground: oklch(0.99 0 0);
@@ -34,8 +34,8 @@
   --border: oklch(0.91 0.008 240);           /* Crisp light border (#e2e8f0) */
   --border-strong: oklch(0.83 0.012 240);    /* Stronger border (#cbd5e1) */
   --input: oklch(0.91 0.008 240);
-  --ring: oklch(0.6 0.18 155);
-  --paper: oklch(0.97 0.006 160);
+  --ring: oklch(0.55 0.22 255);
+  --paper: oklch(0.98 0.006 240);
   --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.03);
   --shadow-raised: 0 4px 14px rgba(15, 23, 42, 0.08), 0 12px 28px rgba(15, 23, 42, 0.06);
   --shadow-overlay: 0 20px 45px rgba(15, 23, 42, 0.25);

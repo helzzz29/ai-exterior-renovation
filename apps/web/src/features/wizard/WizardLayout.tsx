@@ -250,7 +250,7 @@ export function WizardLayout() {
         </div>
         <Stepper projectId={p.id} current={current} statuses={statuses} />
       </div>
-      <section aria-label="What to do now" className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-emerald-200/80 bg-emerald-50/70 px-4 py-3.5 shadow-xs">
+      <section aria-label="What to do now" className="flex flex-wrap items-center gap-x-5 gap-y-3 rounded-2xl border border-blue-200/80 bg-blue-50/70 px-4 py-3.5 shadow-xs">
         <div className="min-w-0 flex-1 basis-64">
           <p className="text-xs font-semibold tracking-wide text-primary uppercase">
             {copy.stepper.stepOf(current + 1, STEPS.length)} · {STEPS[current].title}

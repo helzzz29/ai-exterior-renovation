@@ -62,20 +62,20 @@ export function AppShell() {
           <div className="flex items-center gap-6 lg:gap-8">
             {/* Brand Logo & Name */}
             <Link to="/" aria-label="Home Makeover Planner: my projects" className="flex items-center gap-2.5 group">
-              <span className="grid size-9 place-items-center rounded-xl bg-emerald-700 text-white shadow-xs transition-transform group-hover:scale-105">
+              <span className="grid size-9 place-items-center rounded-xl bg-blue-600 text-white shadow-xs transition-transform group-hover:scale-105">
                 <House className="size-5" />
               </span>
               <div className="flex flex-col">
                 <span className="text-base font-extrabold leading-none tracking-tight text-slate-900 uppercase">
                   Renova AI
                 </span>
-                <span className="text-[10px] font-semibold text-emerald-700 tracking-normal mt-0.5">
+                <span className="text-[10px] font-semibold text-blue-600 tracking-normal mt-0.5">
                   Exterior Cost &amp; Design
                 </span>
               </div>
             </Link>
 
-            {/* Nav Tabs Matching Picture 2 */}
+            {/* Nav Tabs */}
             <nav aria-label="Main" className="hidden md:flex items-center gap-1 self-stretch pt-1">
               <Link
                 to="/"
@@ -83,7 +83,7 @@ export function AppShell() {
                 className={cn(
                   "relative flex items-center gap-2 px-3 py-2 text-sm font-semibold transition-colors",
                   onProjects
-                    ? "text-emerald-700 after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-emerald-600 after:rounded-full"
+                    ? "text-blue-600 after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-blue-600 after:rounded-full"
                     : "text-slate-600 hover:text-slate-900",
                 )}
               >
@@ -96,7 +96,7 @@ export function AppShell() {
                 className={cn(
                   "relative flex items-center gap-2 px-3 py-2 text-sm font-semibold transition-colors",
                   onNew
-                    ? "text-emerald-700 after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-emerald-600 after:rounded-full"
+                    ? "text-blue-600 after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-blue-600 after:rounded-full"
                     : "text-slate-600 hover:text-slate-900",
                 )}
               >
@@ -126,7 +126,7 @@ export function AppShell() {
 
             {/* User Profile Info Pill */}
             <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-xs text-slate-700">
-              <span className="grid size-5 place-items-center rounded-full bg-emerald-600 text-[10px] font-bold text-white">
+              <span className="grid size-5 place-items-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
                 {me.data?.email ? me.data.email[0].toUpperCase() : "U"}
               </span>
               <span className="font-medium text-slate-700 max-w-[140px] truncate">
@@ -167,10 +167,10 @@ export function AppShell() {
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold",
-                onProjects ? "bg-emerald-50 text-emerald-800" : "text-slate-700 hover:bg-slate-50",
+                onProjects ? "bg-blue-50 text-blue-800" : "text-slate-700 hover:bg-slate-50",
               )}
             >
-              <Folder className="size-4 text-emerald-600" />
+              <Folder className="size-4 text-blue-600" />
               <span>My projects</span>
             </Link>
             <Link
@@ -178,10 +178,10 @@ export function AppShell() {
               onClick={() => setMobileOpen(false)}
               className={cn(
                 "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold",
-                onNew ? "bg-emerald-50 text-emerald-800" : "text-slate-700 hover:bg-slate-50",
+                onNew ? "bg-blue-50 text-blue-800" : "text-slate-700 hover:bg-slate-50",
               )}
             >
-              <Plus className="size-4 text-emerald-600" />
+              <Plus className="size-4 text-blue-600" />
               <span>New Renovation</span>
             </Link>
             {activeProjectId && activeProject.data && (

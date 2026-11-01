@@ -45,7 +45,7 @@ function ProjectCard({ p, onDelete }: { p: ProjectSummary; onDelete: () => void 
   const badge = estimateBadge(p);
 
   return (
-    <Card className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400 hover:shadow-md">
+    <Card className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-blue-400 hover:shadow-md">
       <Link
         to={`/projects/${p.id}`}
         className="flex flex-1 flex-col rounded-t-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
@@ -75,7 +75,7 @@ function ProjectCard({ p, onDelete }: { p: ProjectSummary; onDelete: () => void 
               className={cn(
                 "inline-flex items-center rounded-lg px-2.5 py-1 text-[11px] font-semibold tracking-tight shadow-xs backdrop-blur-md",
                 p.report_ready
-                  ? "bg-white/95 text-emerald-800 border border-emerald-300"
+                  ? "bg-white/95 text-blue-800 border border-blue-300"
                   : "bg-white/95 text-slate-700 border border-slate-200",
               )}
             >
@@ -86,7 +86,7 @@ function ProjectCard({ p, onDelete }: { p: ProjectSummary; onDelete: () => void 
           {/* Badge bottom-right */}
           {badge && (
             <div className="absolute right-3 bottom-3">
-              <span className="inline-flex items-center rounded-lg bg-emerald-600 px-2.5 py-1 text-xs font-bold tracking-tight text-white shadow-xs">
+              <span className="inline-flex items-center rounded-lg bg-blue-600 px-2.5 py-1 text-xs font-bold tracking-tight text-white shadow-xs">
                 {badge}
               </span>
             </div>
@@ -94,7 +94,7 @@ function ProjectCard({ p, onDelete }: { p: ProjectSummary; onDelete: () => void 
         </div>
 
         <div className="flex flex-1 flex-col gap-1.5 p-4">
-          <h2 className="text-sm font-bold leading-snug tracking-tight text-slate-900 transition-colors group-hover:text-emerald-700 line-clamp-1">
+          <h2 className="text-sm font-bold leading-snug tracking-tight text-slate-900 transition-colors group-hover:text-blue-700 line-clamp-1">
             {p.name}
           </h2>
           <div className="flex items-center gap-2 text-xs text-slate-500">
@@ -107,10 +107,10 @@ function ProjectCard({ p, onDelete }: { p: ProjectSummary; onDelete: () => void 
       <div className="flex items-center gap-2 border-t border-slate-100 bg-slate-50/70 px-3 py-2.5">
         <Link
           to={`/projects/${p.id}`}
-          className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-emerald-700 transition-colors"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-blue-700 transition-colors"
         >
           <span>Open Studio</span>
-          <ArrowRight className="size-3 text-emerald-100" />
+          <ArrowRight className="size-3 text-blue-100" />
         </Link>
         <Link
           to={`/projects/${p.id}/cost`}
@@ -230,7 +230,7 @@ export function ProjectsPage() {
         </div>
         <Link
           to="/projects/new"
-          className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-emerald-700 transition-all"
+          className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-700 transition-all"
         >
           <Plus className="size-4" />
           <span>{copy.projects.newProject}</span>
@@ -249,9 +249,9 @@ export function ProjectsPage() {
           {workflowSteps.map((s) => (
             <div
               key={s.step}
-              className="rounded-xl border border-slate-200 bg-slate-50/50 p-3 transition-colors hover:border-emerald-300 hover:bg-emerald-50/30"
+              className="rounded-xl border border-slate-200 bg-slate-50/50 p-3 transition-colors hover:border-blue-300 hover:bg-blue-50/30"
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700">
                 {s.step}
               </span>
               <p className="mt-1 text-xs font-bold leading-tight text-slate-900">
@@ -268,7 +268,7 @@ export function ProjectsPage() {
       {/* Projects Grid or Empty State Matching Picture 2 */}
       {projects.data.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-white p-12 sm:p-16 text-center">
-          <div className="mb-4 grid size-16 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+          <div className="mb-4 grid size-16 place-items-center rounded-2xl bg-blue-50 text-blue-700">
             <House className="size-8" />
           </div>
           <h2 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
@@ -280,7 +280,7 @@ export function ProjectsPage() {
           <div className="mt-6">
             <Link
               to="/projects/new"
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-emerald-700 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-700 transition-all"
             >
               <Plus className="size-4" />
               <span>Start my first project</span>
@@ -297,7 +297,7 @@ export function ProjectsPage() {
                 placeholder="Filter projects by name…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white py-2 pl-9 pr-3 text-xs placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                className="w-full rounded-xl border border-slate-200 bg-white py-2 pl-9 pr-3 text-xs placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
           )}

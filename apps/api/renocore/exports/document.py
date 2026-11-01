@@ -59,16 +59,16 @@ CONFIDENCE_TEXT = {
     "low": "Low: calibrated from floor count only; confirm one measurement for greater precision.",
 }
 
-# Architectural Executive Palette (Emerald, Slate, Crisp Whites)
-PRIMARY = colors.HexColor("#065f46")       # Deep rich emerald
-ACCENT = colors.HexColor("#059669")        # Vibrant emerald accent
-ACCENT_LIGHT = colors.HexColor("#ecfdf5")  # Mint tint
+# Architectural Executive Palette (Royal Blue, Slate, Crisp Whites)
+PRIMARY = colors.HexColor("#1d4ed8")       # Royal architectural blue
+ACCENT = colors.HexColor("#2563eb")        # Sapphire blue accent
+ACCENT_LIGHT = colors.HexColor("#eff6ff")  # Sky/ice blue tint
 INK = colors.HexColor("#0f172a")           # Slate 900
 MUTED = colors.HexColor("#64748b")         # Slate 500
 LINE = colors.HexColor("#e2e8f0")          # Slate 200 border
 SHADE = colors.HexColor("#f8fafc")         # Slate 50 background
 SHADE_ALT = colors.HexColor("#f1f5f9")     # Slate 100 zebra
-BAND = colors.HexColor("#064e3b")          # Forest emerald top banner
+BAND = colors.HexColor("#1e3a8a")          # Deep navy/royal blue top banner
 
 
 @dataclass
@@ -346,7 +346,7 @@ def build_report_pdf(data: ReportData) -> bytes:
         [
             [
                 Paragraph(
-                    f"<b>RENOVA AI</b> &middot; <font size=8.5 color='#a7f3d0'>EXTERIOR DESIGN &amp; BOQ REPORT</font><br/>"
+                    f"<b>RENOVA AI</b> &middot; <font size=8.5 color='#bfdbfe'>EXTERIOR DESIGN &amp; BOQ REPORT</font><br/>"
                     f"<font size=14 color='white'><b>Renovation plan: {escape(data.project_name)}</b></font>",
                     s["band_title"],
                 ),
