@@ -3,44 +3,44 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * "Warm architectural studio": warm paper surfaces, one deep-teal action colour, quiet borders.
- * Light mode only (no dark theme is part of the product).
- * Colours keep text at WCAG AA contrast (4.5:1) on white and on their soft backgrounds.
+ * Modern Architectural Studio Design System:
+ * Crisp modern surfaces, electric indigo primary accent, high-legibility typographic hierarchy.
+ * Keeps text at WCAG AA contrast (4.5:1) on white and light backgrounds.
  */
 :root {
   --radius: 0.75rem;
-  --background: oklch(0.985 0.004 95);
-  --foreground: oklch(0.22 0.02 255);
+  --background: oklch(0.985 0.005 250);
+  --foreground: oklch(0.2 0.03 260);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.02 255);
+  --card-foreground: oklch(0.2 0.03 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.02 255);
-  --primary: oklch(0.46 0.09 186);
-  --primary-hover: oklch(0.4 0.08 186);
+  --popover-foreground: oklch(0.2 0.03 260);
+  --primary: oklch(0.48 0.19 255);
+  --primary-hover: oklch(0.42 0.19 255);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.95 0.01 186);
-  --secondary-foreground: oklch(0.3 0.05 200);
-  --muted: oklch(0.96 0.005 95);
-  --muted-foreground: oklch(0.47 0.02 255);
-  --accent: oklch(0.94 0.02 186);
-  --accent-foreground: oklch(0.3 0.05 200);
+  --secondary: oklch(0.95 0.02 255);
+  --secondary-foreground: oklch(0.3 0.08 255);
+  --muted: oklch(0.96 0.008 255);
+  --muted-foreground: oklch(0.48 0.03 260);
+  --accent: oklch(0.93 0.03 255);
+  --accent-foreground: oklch(0.28 0.09 255);
   --destructive: oklch(0.55 0.2 27);
   --destructive-soft: oklch(0.97 0.02 27);
   --destructive-foreground: oklch(0.99 0 0);
-  --warning: oklch(0.8 0.15 75);
-  --warning-soft: oklch(0.97 0.05 85);
-  --warning-foreground: oklch(0.42 0.1 60);
-  --success: oklch(0.47 0.11 152);
+  --warning: oklch(0.78 0.16 70);
+  --warning-soft: oklch(0.97 0.04 80);
+  --warning-foreground: oklch(0.4 0.12 60);
+  --success: oklch(0.52 0.15 155);
   --success-soft: oklch(0.96 0.04 155);
-  --border: oklch(0.9 0.01 95);
-  --border-strong: oklch(0.84 0.012 95);
-  --input: oklch(0.86 0.012 95);
-  --ring: oklch(0.46 0.09 186);
-  /* Paper tint for the band behind page headers and the auth screen. */
-  --paper: oklch(0.965 0.012 85);
-  --shadow-card: 0 1px 2px oklch(0.22 0.02 255 / 0.04), 0 2px 6px oklch(0.22 0.02 255 / 0.04);
-  --shadow-raised: 0 2px 4px oklch(0.22 0.02 255 / 0.05), 0 8px 24px oklch(0.22 0.02 255 / 0.08);
-  --shadow-overlay: 0 12px 40px oklch(0.22 0.02 255 / 0.18);
+  --border: oklch(0.91 0.01 255);
+  --border-strong: oklch(0.84 0.015 255);
+  --input: oklch(0.87 0.015 255);
+  --ring: oklch(0.48 0.19 255);
+  /* Studio canvas backdrop */
+  --paper: oklch(0.97 0.01 250);
+  --shadow-card: 0 1px 3px oklch(0.2 0.03 260 / 0.05), 0 4px 12px oklch(0.2 0.03 260 / 0.04);
+  --shadow-raised: 0 4px 6px oklch(0.2 0.03 260 / 0.05), 0 12px 28px oklch(0.2 0.03 260 / 0.08);
+  --shadow-overlay: 0 16px 48px oklch(0.2 0.03 260 / 0.16);
 }
 
 @theme inline {

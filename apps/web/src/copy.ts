@@ -14,11 +14,11 @@ function ordinal(n: number): string {
 
 export const copy = {
   app: {
-    name: "Home Makeover Planner",
-    tagline: "See your house in new materials and know what it will cost.",
+    name: "AuraReno Studio",
+    tagline: "AI-Powered Exterior Renovation & Architectural Cost Estimator",
     demoBadge: "Demo mode: sample data, nothing is saved online",
     skipToContent: "Skip to main content",
-    homeLink: "Home Makeover Planner: my projects",
+    homeLink: "AuraReno Studio: my projects",
     demoShort: "Demo",
   },
   common: {

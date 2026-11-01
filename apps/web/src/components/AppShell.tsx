@@ -47,44 +47,57 @@ export function AppShell() {
       >
         {copy.app.skipToContent}
       </a>
-      <header className="sticky top-0 z-30 border-b bg-card/90 backdrop-blur supports-[backdrop-filter]:bg-card/80">
-        <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 sm:px-6">
-          <Link to="/" aria-label={copy.app.homeLink} className="flex items-center gap-2.5 rounded-md font-semibold tracking-tight">
-            <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-              <House className="size-4" aria-hidden="true" />
+      <header className="sticky top-0 z-30 border-b border-border/80 bg-card/90 backdrop-blur-md supports-[backdrop-filter]:bg-card/75">
+        <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
+          <Link to="/" aria-label={copy.app.homeLink} className="flex items-center gap-3 rounded-lg font-semibold tracking-tight transition-opacity hover:opacity-90">
+            <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary-hover text-primary-foreground shadow-sm ring-1 ring-primary/20">
+              <House className="size-4.5" aria-hidden="true" />
             </span>
-            <span className="hidden whitespace-nowrap sm:inline" aria-hidden="true">
-              {copy.app.name}
-            </span>
+            <div className="flex flex-col">
+              <span className="text-base font-bold leading-none tracking-tight text-foreground sm:inline">
+                {copy.app.name}
+              </span>
+              <span className="hidden text-[11px] font-medium text-muted-foreground sm:inline">
+                AI Exterior Architecture
+              </span>
+            </div>
           </Link>
           {IS_MOCK && (
-            <Badge variant="warning" title={copy.app.demoBadge}>
+            <Badge variant="warning" title={copy.app.demoBadge} className="ml-2 font-medium">
               <span aria-hidden="true" className="xl:hidden">
                 {copy.app.demoShort}
               </span>
               <span className="sr-only xl:not-sr-only">{copy.app.demoBadge}</span>
             </Badge>
           )}
-          <nav className="ml-auto flex items-center gap-1" aria-label="Main">
+          <nav className="ml-auto flex items-center gap-2" aria-label="Main">
             <Button
               variant="ghost"
               size="sm"
               asChild
-              className={cn(onProjects && "bg-accent text-accent-foreground")}
+              className={cn("rounded-lg px-3 py-1.5 font-medium transition-all", onProjects && "bg-secondary text-secondary-foreground")}
             >
               <Link to="/" aria-current={pathname === "/" ? "page" : undefined}>
-                <FolderOpen aria-hidden="true" className="hidden sm:block" />
+                <FolderOpen aria-hidden="true" className="hidden size-4 sm:block" />
                 {copy.nav.myProjects}
               </Link>
             </Button>
-            <span className="hidden max-w-48 truncate px-2 text-sm text-muted-foreground lg:inline">{me.data?.email}</span>
+            {me.data?.email && (
+              <div className="hidden items-center gap-2 rounded-full border border-border/60 bg-muted/50 px-2.5 py-1 lg:flex">
+                <span className="grid size-5 place-items-center rounded-full bg-primary/10 text-[11px] font-bold text-primary">
+                  {me.data.email[0].toUpperCase()}
+                </span>
+                <span className="max-w-40 truncate text-xs font-medium text-muted-foreground">{me.data.email}</span>
+              </div>
+            )}
             <Button
               variant="ghost"
               size="sm"
+              className="rounded-lg text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
               disabled={logout.isPending}
               onClick={() => logout.mutate(undefined, { onSettled: () => navigate("/login") })}
             >
-              <LogOut aria-hidden="true" />
+              <LogOut aria-hidden="true" className="size-4" />
               <span className="sr-only sm:not-sr-only">{copy.nav.logOut}</span>
             </Button>
           </nav>
