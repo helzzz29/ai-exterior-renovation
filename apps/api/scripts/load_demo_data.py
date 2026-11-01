@@ -1,22 +1,53 @@
 """Seed initial admin and user directly into database."""
 
+import os
+import sys
 import uuid
 from datetime import UTC, datetime
+from pathlib import Path
+
+# Ensure apps/api is in python path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import psycopg
 from argon2 import PasswordHasher
 
-from renocore.settings import get_settings
+try:
+    from renocore.settings import get_settings
 
-settings = get_settings()
-DSN = settings.queue_dsn
+    DSN = get_settings().queue_dsn
+except Exception:
+    # Direct fallback from root .env
+    env_file = Path(__file__).resolve().parents[3] / ".env"
+    raw = ""
+    if env_file.exists():
+        for line in env_file.read_text().splitlines():
+            line = line.strip()
+            if line.startswith("DATABASE_URL="):
+                raw = line.partition("=")[2].strip()
+                break
+    raw = raw or os.getenv("DATABASE_URL", "")
+    for prefix in (
+        "postgresql+asyncpg://",
+        "postgresql+psycopg2://",
+        "postgresql+psycopg://",
+        "postgres://",
+    ):
+        if raw.startswith(prefix):
+            raw = "postgresql://" + raw[len(prefix) :]
+            break
+    DSN = raw
+
+if not DSN:
+    sys.exit("Error: DATABASE_URL could not be found in .env or environment.")
 
 USERS = {"admin@example.com": "Admin@12345", "user@example.com": "User@12345"}
 
 
 def main():
     hasher = PasswordHasher()
-    print(f"Connecting to database via {DSN.split('@')[-1]}...")
+    target = DSN.split("@")[-1] if "@" in DSN else DSN
+    print(f"Connecting to database via {target}...")
     with psycopg.connect(DSN) as conn:
         with conn.cursor() as cur:
             for email, password in USERS.items():
