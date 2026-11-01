@@ -173,6 +173,25 @@ def test_report_without_images_or_lines() -> None:
     assert "rough estimate" in text
 
 
+def test_report_with_corrupt_or_invalid_images() -> None:
+    est = sample_estimate()
+    pdf = build_report_pdf(
+        ReportData(
+            project_name="Corrupt images test",
+            created_at=datetime(2026, 1, 1, tzinfo=UTC),
+            estimate=est,
+            estimate_version=1,
+            design_name="Design 1",
+            parts=[ReportPart("Main wall", "Exterior emulsion paint")],
+            original_jpeg=b"this-is-not-an-image",
+            redesign_jpeg=b"",
+        )
+    )
+    assert pdf.startswith(b"%PDF")
+    text = _text(pdf)
+    assert "image not available" in text
+
+
 def test_format_inr_uses_indian_grouping() -> None:
     assert format_inr(41086) == "Rs. 41,086"
     assert format_inr(999) == "Rs. 999"

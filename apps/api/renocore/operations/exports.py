@@ -85,14 +85,27 @@ async def download(session: AsyncSession, user: User, report_id: str) -> tuple[b
     report = await proj.get_report(session, user, report_id)
     design = await session.get(Design, report.design_id)
     name = "".join(c if c.isalnum() else "-" for c in (design.name if design else "report"))
-    return await get_storage().get(report.path), f"renovation-report-{name.lower()}.pdf"
+    try:
+        data = await get_storage().get(report.path)
+    except Exception as exc:
+        raise NotFound(f"The report file is no longer available: {exc}")
+    return data, f"renovation-report-{name.lower()}.pdf"
 
 
 async def _bytes_of(session: AsyncSession, image_id: str | None) -> bytes | None:
     if not image_id:
         return None
-    row = await session.get(ImageRow, image_id)
-    return await get_storage().get(row.path) if row else None
+    try:
+        row = await session.get(ImageRow, image_id)
+        if not row or not row.path:
+            return None
+        return await get_storage().get(row.path)
+    except Exception as exc:
+        import logging
+        logging.getLogger("renocore.exports").warning(
+            "Could not retrieve image bytes for image_id %s: %s", image_id, exc
+        )
+        return None
 
 
 async def run_report(ctx: JobCtx) -> None:
