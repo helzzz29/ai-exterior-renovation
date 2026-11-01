@@ -415,8 +415,8 @@ def build_report_pdf(data: ReportData) -> bytes:
     images = Table(
         [
             [
-                Paragraph("<b>BEFORE: your house today</b>", s["img_label"]),
-                Paragraph("<b>AFTER: your makeover</b>", s["img_label"]),
+                Paragraph("<b>BEFORE: Existing House Exterior</b>", s["img_label"]),
+                Paragraph("<b>AFTER TRANSITION: Proposed Architectural Transformation</b>", s["img_label"]),
             ],
             [_image(data.original_jpeg, half, 72 * mm), _image(data.redesign_jpeg, half, 72 * mm)],
         ],
