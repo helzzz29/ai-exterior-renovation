@@ -1,27 +1,22 @@
 """Seed initial admin and user directly into database."""
 
-import os
-import sys
 import uuid
 from datetime import UTC, datetime
 
 import psycopg
 from argon2 import PasswordHasher
 
-DSN = os.getenv("DATABASE_URL")
-if not DSN:
-    sys.exit("Error: DATABASE_URL environment variable is required.")
+from renocore.settings import get_settings
 
-# Convert asyncpg/postgres prefix to standard postgresql if needed
-if DSN.startswith("postgresql+asyncpg://"):
-    DSN = "postgresql://" + DSN[len("postgresql+asyncpg://") :]
+settings = get_settings()
+DSN = settings.queue_dsn
 
 USERS = {"admin@example.com": "Admin@12345", "user@example.com": "User@12345"}
 
 
 def main():
     hasher = PasswordHasher()
-    print("Connecting to database...")
+    print(f"Connecting to database via {DSN.split('@')[-1]}...")
     with psycopg.connect(DSN) as conn:
         with conn.cursor() as cur:
             for email, password in USERS.items():
