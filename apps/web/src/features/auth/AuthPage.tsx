@@ -20,8 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { IS_MOCK, SIGNUP_OPEN } from "@/lib/config";
-import { DEMO_HINT } from "./demo";
+import { SIGNUP_OPEN } from "@/lib/config";
 
 /** Login and sign-up. App.tsx keys this by mode, so switching between them starts with a clean form. */
 export function AuthPage({ mode }: { mode: "login" | "register" }) {
@@ -29,8 +28,8 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
   const login = useLogin(mode);
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState(IS_MOCK && mode === "login" ? DEMO_HINT.email : "");
-  const [password, setPassword] = useState(IS_MOCK && mode === "login" ? DEMO_HINT.password : "");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [formError, setFormError] = useState<string | null>(null);
