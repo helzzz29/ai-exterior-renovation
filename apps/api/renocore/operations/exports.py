@@ -10,7 +10,7 @@ from renocore.operations import budgets as est
 from renocore.operations import job_runner as jobs_svc
 from renocore.operations import makeovers as designs_svc
 from renocore.operations import workspaces as proj
-from renocore.operations.failures import conflict
+from renocore.operations.failures import conflict, not_found
 from renocore.operations.image_pipeline import run_image_work
 from renocore.operations.job_runner import JobCtx
 from renocore.operations.materials_catalog import get_catalogue
@@ -88,7 +88,7 @@ async def download(session: AsyncSession, user: User, report_id: str) -> tuple[b
     try:
         data = await get_storage().get(report.path)
     except Exception as exc:
-        raise NotFound(f"The report file is no longer available: {exc}")
+        raise not_found("report file") from exc
     return data, f"renovation-report-{name.lower()}.pdf"
 
 
