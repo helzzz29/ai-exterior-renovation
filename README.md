@@ -234,21 +234,55 @@ Create a `.env` file in the project root:
 cp .env.example .env
 ```
 
-Ensure the following variables are configured:
+Configure your environment variables:
 
 ```ini
-# Database
+# Application Mode
+RUN_WORKER=true
+
+# Database (PostgreSQL)
 DATABASE_URL=postgresql+asyncpg://renouser:renopass@localhost:5433/renovation_dev
 DATABASE_TEST_URL=postgresql+asyncpg://renouser:renopass@localhost:5434/renovation_test
 
-# AI Credentials
+# AI Vision & Inpainting Services
 GEMINI_API_KEY=your_gemini_api_key_here
 JEV_API_KEY=your_jev_api_key_here
+
+# Storage Backend (Choose 'local' for dev or 's3' for Backblaze B2 / AWS S3 / Cloudflare R2)
+STORAGE_BACKEND=local
+
+# Cloud S3 / Backblaze B2 Storage (Required only if STORAGE_BACKEND=s3)
+S3_ENDPOINT_URL=https://s3.us-east-005.backblazeb2.com
+S3_REGION=us-east-005
+S3_BUCKET=renova-prod-files
+S3_ACCESS_KEY_ID=0050c525d18bd650000000001
+S3_SECRET_ACCESS_KEY=your_application_key_here
 
 # Security
 SECRET_KEY=dev_secret_key_change_in_production
 ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
 ```
+
+> [!NOTE]
+> **Resilient Storage Fallback**: If `STORAGE_BACKEND=s3` is set but bucket or access keys are missing or invalid, Renova AI automatically falls back to `local` disk storage with a warning log, ensuring the application and PDF generator never crash due to unconfigured cloud credentials.
+
+---
+
+### Cloud Object Storage Setup (Backblaze B2)
+
+Renova AI supports any S3-compatible cloud storage (Backblaze B2, Cloudflare R2, AWS S3, MinIO) to permanently store uploaded photos, segmentation masks, AI design renders, and contractor PDF reports:
+
+1. **Sign Up**: Create a free account at [Backblaze B2](https://www.backblaze.com/cloud-storage) (10 GB free forever, no credit card required).
+2. **Create Bucket**:
+   - Name: `renova-prod-files` (or your chosen unique name).
+   - Visibility: **Private** (all downloads are securely signed by the backend).
+   - Note the **Endpoint** (e.g. `s3.us-east-005.backblazeb2.com`) and **Region** (e.g. `us-east-005`).
+3. **Generate Application Key**:
+   - Go to **Application Keys** &rarr; **Add a New Application Key** (do not use the Master Application Key as S3 clients require a 25-character key ID).
+   - Access: **Read and Write** for your bucket.
+   - Copy the 25-character **`keyID`** (for `S3_ACCESS_KEY_ID`) and the **`applicationKey`** (for `S3_SECRET_ACCESS_KEY`).
+4. **Add to `.env` or Render Dashboard**:
+   Set `STORAGE_BACKEND=s3` along with your endpoint, region, bucket, key ID, and secret.
 
 ---
 
@@ -350,8 +384,11 @@ Key API groups:
 | `GET` | `/api/materials` | Retrieve full materials catalogue |
 | `POST` | `/api/projects/{id}/designs` | Create or update material design variant |
 | `POST` | `/api/projects/{id}/render` | Trigger photorealistic AI makeover generation |
-| `GET` | `/api/projects/{id}/estimate` | Get itemized BOQ calculation (materials, labor, GST) |
-| `GET` | `/api/projects/{id}/report.pdf` | Download branded contractor-ready PDF report |
+| `GET` | `/api/designs/{id}/estimate` | Get itemized BOQ calculation (materials, labor, GST) |
+| `POST` | `/api/designs/{id}/reports` | Enqueue background job to build architectural PDF report |
+| `GET` | `/api/designs/{id}/reports` | List generated report versions for a design |
+| `GET` | `/api/reports/{id}/download` | Stream and download contractor-ready PDF report |
+| `GET` | `/api/jobs/{id}` | Poll asynchronous background job status (detection, makeover, export) |
 
 ---
 
@@ -362,7 +399,7 @@ The codebase maintains automated test coverage across both frontend and backend 
 ### Frontend Unit & Integration Tests (Vitest)
 ```bash
 cd apps/web
-pnpm test          # Runs all 18 test files (159 tests)
+pnpm test          # Runs all 18 test files (159 tests passed)
 pnpm typecheck     # TypeScript strict compilation check
 pnpm lint          # ESLint code quality analysis
 pnpm build         # Production Vite build verification
@@ -371,7 +408,7 @@ pnpm build         # Production Vite build verification
 ### Backend Unit & Integration Tests (Pytest)
 ```bash
 cd apps/api
-uv run pytest apps/api/tests/unit/   # Runs all 440 backend tests
+uv run pytest apps/api/tests/unit/   # Runs all 441 backend unit tests passed (100%)
 ```
 
 ---
@@ -431,6 +468,20 @@ AI-Renovation/
 ## Deployment
 
 The application is container-ready and configured for single-service or multi-service container deployment:
+
+### Cloud Deployment (Render Blueprint)
+
+The repository includes a ready-to-deploy [`render.yaml`](file:///Users/salesteam/Projects/AI-Renovation/render.yaml) Blueprint:
+
+1. Push your repository to GitHub.
+2. In the [Render Dashboard](https://dashboard.render.com), click **New** &rarr; **Blueprint** and connect your repository.
+3. Configure the environment secrets:
+   - `DATABASE_URL`: Connection string to your cloud PostgreSQL database (e.g. Neon, Supabase, or Render Postgres).
+   - `GEMINI_API_KEY`: Google Gemini API key.
+   - `JEV_API_KEY`: Jev inpainting/segmentation key.
+   - `STORAGE_BACKEND`: Set to `s3` for Backblaze B2, or `local` for ephemeral container storage.
+   - `S3_ENDPOINT_URL`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`: Backblaze B2 credentials (see [Cloud Object Storage Setup](#cloud-object-storage-setup-backblaze-b2)).
+4. Click **Apply**: Render automatically builds the multi-stage Docker container, runs database migrations, seeds the 4 default users on startup, and exposes the app with free SSL.
 
 ### Production Docker Container
 ```bash
