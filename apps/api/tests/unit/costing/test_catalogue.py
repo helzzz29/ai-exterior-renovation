@@ -24,7 +24,7 @@ def cat():
 
 
 def test_seed_catalogue_loads(cat):
-    assert 15 <= len(cat) <= 20
+    assert 15 <= len(cat) <= 35
     assert {m.category for m in cat.values()} == {
         "paint",
         "texture",
@@ -56,7 +56,15 @@ def test_seed_label_rules(cat):
         if m.category == "gate":
             assert m.applicable_labels == ["gate"]
         if m.category in ("paint", "texture"):
-            assert set(m.applicable_labels) == {"wall", "parapet", "pillar", "balcony", "roof_edge"}
+            assert set(m.applicable_labels) == {
+                "wall",
+                "parapet",
+                "pillar",
+                "balcony",
+                "roof_edge",
+                "canopy",
+                "compound_wall",
+            }
         if m.category == "tiles":
             assert m.companions and m.companions[0].kind == "adhesive"
         if m.category == "paint":

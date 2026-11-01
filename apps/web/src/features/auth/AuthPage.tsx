@@ -60,29 +60,29 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
   };
 
   const featureIcons = [
-    <Layers key="f1" className="size-3.5 text-emerald-600 shrink-0" />,
-    <Sparkles key="f2" className="size-3.5 text-emerald-600 shrink-0" />,
-    <Calculator key="f3" className="size-3.5 text-emerald-600 shrink-0" />,
+    <Layers key="f1" className="size-3.5 text-blue-600 shrink-0" />,
+    <Sparkles key="f2" className="size-3.5 text-blue-600 shrink-0" />,
+    <Calculator key="f3" className="size-3.5 text-blue-600 shrink-0" />,
   ];
 
   return (
     <main className="h-dvh max-h-dvh overflow-y-auto lg:overflow-hidden bg-slate-50/50 lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       {/* Left Column: Architectural Showcase & Value Propositions */}
-      <aside className="relative hidden h-full max-h-dvh flex-col justify-between overflow-hidden border-r border-emerald-100/80 bg-gradient-to-br from-emerald-50/80 via-white to-emerald-50/40 p-6 xl:p-8 text-slate-800 lg:flex">
+      <aside className="relative hidden h-full max-h-dvh flex-col justify-between overflow-hidden border-r border-blue-100/80 bg-gradient-to-br from-blue-50/80 via-white to-blue-50/40 p-6 xl:p-8 text-slate-800 lg:flex">
         {/* Subtle grid pattern background */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.22] [background-image:radial-gradient(#059669_1px,transparent_1px)] [background-size:24px_24px]"
+          className="pointer-events-none absolute inset-0 opacity-[0.18] [background-image:radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px]"
           aria-hidden="true"
         />
 
         {/* Brand Header */}
         <div className="relative z-10 flex items-center gap-2.5 shrink-0">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/25">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/25">
             <House className="size-4.5" aria-hidden="true" />
           </div>
           <div className="flex items-center gap-2">
             <span className="text-lg font-bold tracking-tight text-slate-900">{copy.app.name}</span>
-            <span className="inline-flex items-center rounded-full border border-emerald-200/80 bg-emerald-100/60 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
+            <span className="inline-flex items-center rounded-full border border-blue-200/80 bg-blue-100/60 px-2 py-0.5 text-[11px] font-semibold text-blue-800">
               {copy.app.tagline}
             </span>
           </div>
@@ -105,10 +105,10 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
             {copy.auth.sidePoints.map((pt, idx) => (
               <div
                 key={pt}
-                className="flex items-center gap-2.5 rounded-lg border border-emerald-100/90 bg-white/85 px-2.5 py-1.5 shadow-xs backdrop-blur-xs transition hover:border-emerald-200 hover:bg-white"
+                className="flex items-center gap-2.5 rounded-lg border border-blue-100/90 bg-white/85 px-2.5 py-1.5 shadow-xs backdrop-blur-xs transition hover:border-blue-200 hover:bg-white"
               >
-                <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">
-                  {featureIcons[idx] ?? <Check className="size-3 text-emerald-600" />}
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-700 border border-blue-100">
+                  {featureIcons[idx] ?? <Check className="size-3 text-blue-600" />}
                 </div>
                 <p className="text-xs text-slate-700 leading-tight">
                   <span className="font-semibold text-slate-900 mr-1.5">
@@ -124,9 +124,9 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
             ))}
           </div>
 
-          <div className="flex items-center gap-3 pt-1 text-[10.5px] text-slate-400 font-medium border-t border-emerald-100/60">
+          <div className="flex items-center gap-3 pt-1 text-[10.5px] text-slate-400 font-medium border-t border-blue-100/60">
             <span className="flex items-center gap-1">
-              <ShieldCheck className="size-3.5 text-emerald-600" /> Grade-A AI Accuracy
+              <ShieldCheck className="size-3.5 text-blue-600" /> Grade-A AI Accuracy
             </span>
             <span>•</span>
             <span>Indian Contractor Rates (INR)</span>
@@ -136,18 +136,18 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
         </div>
       </aside>
 
-      {/* Right Column: Clean White & Emerald Authentication Form */}
+      {/* Right Column: Clean White & Blue Authentication Form */}
       <div className="relative flex h-full max-h-dvh flex-col items-center justify-center overflow-y-auto lg:overflow-hidden bg-white px-4 py-6 sm:px-6 lg:bg-slate-50/40">
         {/* Subtle background glow */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,#ecfdf5,transparent_55%)] opacity-70"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,#dbeafe,transparent_55%)] opacity-70"
           aria-hidden="true"
         />
 
         <div className="relative z-10 w-full max-w-md my-auto space-y-4">
           {/* Mobile Header (only visible on small screens) */}
           <div className="flex flex-col items-center gap-1.5 text-center lg:hidden">
-            <span className="grid size-10 place-items-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/20">
+            <span className="grid size-10 place-items-center rounded-xl bg-blue-600 text-white shadow-md shadow-blue-600/20">
               <House className="size-5" aria-hidden="true" />
             </span>
             <p className="text-xl font-bold tracking-tight text-slate-900">{copy.app.name}</p>
@@ -155,14 +155,14 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
           </div>
 
           {/* Elevated Auth Card */}
-          <Card className="overflow-hidden rounded-2xl border border-emerald-100/90 bg-white shadow-lg shadow-slate-200/50">
-            {/* Top decorative emerald gradient bar */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400" />
+          <Card className="overflow-hidden rounded-2xl border border-blue-100/90 bg-white shadow-lg shadow-slate-200/50">
+            {/* Top decorative blue gradient bar */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-blue-600 via-sky-500 to-blue-500" />
 
             <CardHeader className="p-5 pb-2 sm:p-6 sm:pb-3">
               <div className="mb-1 flex items-center justify-between">
-                <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200/60">
-                  <House className="size-3 text-emerald-600" />
+                <span className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-800 border border-blue-200/60">
+                  <House className="size-3 text-blue-600" />
                   Renova Studio
                 </span>
                 {isLogin && (
@@ -174,10 +174,10 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                       setErrors({});
                       setFormError(null);
                     }}
-                    className="inline-flex items-center gap-1 rounded-md border border-emerald-200 bg-emerald-50/80 px-2 py-0.5 text-[11px] font-semibold text-emerald-700 transition hover:bg-emerald-100/80"
+                    className="inline-flex items-center gap-1 rounded-md border border-blue-200 bg-blue-50/80 px-2 py-0.5 text-[11px] font-semibold text-blue-700 transition hover:bg-blue-100/80"
                     title="Fill demo login credentials"
                   >
-                    <Sparkles className="size-3 text-emerald-600" />
+                    <Sparkles className="size-3 text-blue-600" />
                     <span>Auto-fill Demo</span>
                   </button>
                 )}
@@ -212,7 +212,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                           setEmail(e.target.value);
                           if (errors.email) setErrors((x) => ({ ...x, email: undefined }));
                         }}
-                        className="h-10 rounded-xl border-slate-200 pl-9 text-sm focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20"
+                        className="h-10 rounded-xl border-slate-200 pl-9 text-sm focus-visible:border-blue-500 focus-visible:ring-blue-500/20"
                         required
                       />
                       <Mail
@@ -243,7 +243,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                           setPassword(e.target.value);
                           if (errors.password) setErrors((x) => ({ ...x, password: undefined }));
                         }}
-                        className="h-10 rounded-xl border-slate-200 pl-9 pr-16 text-sm focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20"
+                        className="h-10 rounded-xl border-slate-200 pl-9 pr-16 text-sm focus-visible:border-blue-500 focus-visible:ring-blue-500/20"
                         required
                       />
                       <Lock
@@ -268,7 +268,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
 
                 <Button
                   type="submit"
-                  className="h-10.5 w-full rounded-xl bg-emerald-600 text-sm font-semibold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700 active:bg-emerald-800"
+                  className="h-10.5 w-full rounded-xl bg-blue-600 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition hover:bg-blue-700 active:bg-blue-800"
                   size="lg"
                   pending={login.isPending}
                 >
@@ -290,7 +290,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
               {SIGNUP_OPEN ? (
                 <div className="mt-4 border-t border-slate-100 pt-3.5 text-center text-xs sm:text-sm">
                   <Link
-                    className="font-medium text-emerald-700 transition hover:text-emerald-800 hover:underline underline-offset-4"
+                    className="font-medium text-blue-600 transition hover:text-blue-700 hover:underline underline-offset-4"
                     to={isLogin ? "/register" : "/login"}
                   >
                     {isLogin ? copy.auth.toRegister : copy.auth.toLogin}
@@ -306,7 +306,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
 
           {/* Bottom Security & Privacy Badge */}
           <div className="flex items-center justify-center gap-1.5 text-center text-[11px] text-slate-400">
-            <ShieldCheck className="size-3.5 text-emerald-600" />
+            <ShieldCheck className="size-3.5 text-blue-600" />
             <span>256-bit encrypted • Private project workspace</span>
           </div>
         </div>

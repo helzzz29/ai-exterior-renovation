@@ -8,15 +8,15 @@ export function FacadeArt({ className }: { className?: string }) {
   return (
     <div className={cn("relative mx-auto w-full max-w-md select-none", className)}>
       {/* Container Card with subtle shadow and border */}
-      <div className="overflow-hidden rounded-xl border border-emerald-100/90 bg-white/95 p-2.5 shadow-lg shadow-emerald-950/5 backdrop-blur-sm sm:p-3">
+      <div className="overflow-hidden rounded-xl border border-blue-100/90 bg-white/95 p-2.5 shadow-lg shadow-blue-950/5 backdrop-blur-sm sm:p-3">
         {/* Mockup Header Toolbar */}
         <div className="mb-1.5 flex items-center justify-between border-b border-slate-100 pb-1.5 px-0.5 text-[11px]">
           <div className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="size-2 rounded-full bg-blue-500 animate-pulse" />
             <span className="font-semibold text-slate-700">AI Facade Scan & Elevation</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-700 border border-emerald-200/60">
+            <span className="rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700 border border-blue-200/60">
               Grade A (84/100)
             </span>
             <span className="text-[10px] font-medium text-slate-400">1:50</span>
@@ -26,7 +26,7 @@ export function FacadeArt({ className }: { className?: string }) {
         {/* Architectural Elevation SVG */}
         <svg
           viewBox="0 0 420 270"
-          className="h-auto max-h-[190px] xl:max-h-[220px] w-full rounded-lg bg-gradient-to-b from-sky-50/60 via-slate-50/40 to-emerald-50/30 object-contain"
+          className="h-auto max-h-[190px] xl:max-h-[220px] w-full rounded-lg bg-gradient-to-b from-sky-50/60 via-slate-50/40 to-blue-50/30 object-contain"
           aria-hidden="true"
           focusable="false"
         >
@@ -209,7 +209,7 @@ export function FacadeArt({ className }: { className?: string }) {
         {/* Mockup Footer Card with BOQ Metrics */}
         <div className="mt-1.5 flex items-center justify-between rounded-lg bg-slate-50 border border-slate-200/60 px-2.5 py-1 text-xs">
           <div className="flex items-center gap-1.5">
-            <span className="flex size-4 items-center justify-center rounded bg-emerald-600 text-[9px] font-bold text-white">
+            <span className="flex size-4 items-center justify-center rounded bg-blue-600 text-[9px] font-bold text-white">
               ₹
             </span>
             <div className="flex items-baseline gap-1.5">
@@ -218,7 +218,7 @@ export function FacadeArt({ className }: { className?: string }) {
             </div>
           </div>
           <div className="text-right">
-            <span className="text-[11px] font-semibold text-emerald-700">940 sq.ft • 3 Finishes</span>
+            <span className="text-[11px] font-semibold text-blue-700">940 sq.ft • 3 Finishes</span>
           </div>
         </div>
       </div>

@@ -17,6 +17,8 @@ export interface DraftPart {
   needsCheck: boolean;
   checked: boolean;
   proposed: boolean;
+  /** When true, the element is preserved as-is on the photo and excluded from costing (₹0 in BOQ). */
+  excluded?: boolean;
 }
 
 export interface EditorState {
@@ -46,7 +48,8 @@ export type EditorAction =
   | { type: "addBox"; width: number; height: number }
   | { type: "finishShape" }
   | { type: "cancelShape" }
-  | { type: "labelNewPart"; label: Label };
+  | { type: "labelNewPart"; label: Label }
+  | { type: "toggleExclude"; key: string };
 
 export const initialEditorState: EditorState = {
   parts: [],
@@ -127,6 +130,11 @@ export function editorReducer(state: EditorState, action: EditorAction): EditorS
       }));
     case "acceptProposed":
       return update(state, action.key, (p) => ({ ...p, proposed: false, checked: true }));
+    case "toggleExclude":
+      return update(state, action.key, (p) => ({
+        ...p,
+        excluded: !p.excluded,
+      }));
     case "remove":
     case "rejectProposed": {
       if (!state.parts.some((p) => p.key === action.key)) return state;
