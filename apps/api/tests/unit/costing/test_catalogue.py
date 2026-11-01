@@ -24,7 +24,7 @@ def cat():
 
 
 def test_seed_catalogue_loads(cat):
-    assert 15 <= len(cat) <= 20
+    assert 15 <= len(cat) <= 35
     assert {m.category for m in cat.values()} == {
         "paint",
         "texture",

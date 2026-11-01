@@ -204,6 +204,36 @@
     "maintenance": "Wash with water once a year; repaint over it when it starts to fade."
   },
   {
+    "id": "texture-trowel-rustic",
+    "name": "Rustic trowel plaster finish",
+    "category": "texture",
+    "description": "Heavy sand-faced trowel texture with deep aggregate grain. Conceals rough plaster and undulations on exterior walls.",
+    "applicable_labels": [
+      "wall",
+      "parapet",
+      "pillar",
+      "balcony",
+      "roof_edge",
+      "canopy",
+      "compound_wall"
+    ],
+    "pricing_unit": "kg",
+    "measure_basis": "area",
+    "coverage_sqft_per_unit": 8,
+    "coats": 1,
+    "pack_size": 25,
+    "wastage_pct": 10,
+    "material_rate": 48,
+    "labour_rate": 35,
+    "companions": [],
+    "colorable": true,
+    "default_color": "#D5C8B4",
+    "swatch": "texture-trowel-rustic.png",
+    "weather_resistance": "high",
+    "durability": "10-12 years",
+    "maintenance": "Wash every couple of years with a soft water spray; recoatable with exterior emulsion."
+  },
+  {
     "id": "cladding-natural-stone",
     "name": "Natural stone cladding",
     "category": "cladding",
@@ -259,6 +289,39 @@
     "weather_resistance": "high",
     "durability": "20+ years",
     "maintenance": "Clear water-repellent coat every 3-4 years keeps the bricks from absorbing rain."
+  },
+  {
+    "id": "cladding-granite-slabs",
+    "name": "Natural granite stone cladding",
+    "category": "cladding",
+    "description": "Polished or flamed natural granite stone slabs. Zero water absorption, high impact resistance, perfect for plinths, entrance pillars, and accent walls.",
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "parapet",
+      "compound_wall"
+    ],
+    "pricing_unit": "sqft",
+    "measure_basis": "area",
+    "coats": 1,
+    "wastage_pct": 10,
+    "material_rate": 180,
+    "labour_rate": 65,
+    "companions": [
+      {
+        "kind": "adhesive",
+        "name": "Tile & stone adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.5,
+        "pack_size": 20,
+        "rate": 28
+      }
+    ],
+    "colorable": false,
+    "swatch": "cladding-granite-slabs.png",
+    "weather_resistance": "high",
+    "durability": "25+ years",
+    "maintenance": "Hose down with water as needed; virtually indestructible and zero maintenance."
   },
   {
     "id": "tiles-slate-stone",
@@ -366,6 +429,39 @@
     "maintenance": "Very low; wash occasionally. Hard to repair if a tile chips, so keep a few spares."
   },
   {
+    "id": "tiles-terracotta-clay",
+    "name": "Terracotta clay wall tiles",
+    "category": "tiles",
+    "description": "Natural kiln-fired terracotta clay facade tiles. Provides natural heat insulation and an earthy, timeless brick-red look.",
+    "applicable_labels": [
+      "wall",
+      "pillar",
+      "balcony",
+      "compound_wall"
+    ],
+    "pricing_unit": "sqft",
+    "measure_basis": "area",
+    "coats": 1,
+    "wastage_pct": 10,
+    "material_rate": 125,
+    "labour_rate": 45,
+    "companions": [
+      {
+        "kind": "adhesive",
+        "name": "Tile adhesive",
+        "unit": "kg",
+        "quantity_per_sqft": 0.4,
+        "pack_size": 20,
+        "rate": 22
+      }
+    ],
+    "colorable": false,
+    "swatch": "tiles-terracotta-clay.png",
+    "weather_resistance": "high",
+    "durability": "15-20 years",
+    "maintenance": "Wash with water once a year; develops a warm natural patina over time."
+  },
+  {
     "id": "panel-acp",
     "name": "Aluminium composite panels (ACP)",
     "category": "panel",
@@ -443,6 +539,59 @@
     "weather_resistance": "medium",
     "durability": "10-15 years",
     "maintenance": "Wash once a year; colour may lighten slowly in strong sun."
+  },
+  {
+    "id": "panel-fluted-charcoal",
+    "name": "Fluted exterior wall panels",
+    "category": "panel",
+    "description": "Heavy-duty vertical fluted composite panels (8 × 4 ft sheets). Creates striking 3D slatted lines and shadow play on modern elevations.",
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "parapet",
+      "canopy",
+      "louvers"
+    ],
+    "pricing_unit": "sheet",
+    "measure_basis": "area",
+    "coats": 1,
+    "piece_area_sqft": 32,
+    "wastage_pct": 10,
+    "material_rate": 4200,
+    "labour_rate": 95,
+    "companions": [],
+    "colorable": false,
+    "swatch": "panel-fluted-charcoal.png",
+    "weather_resistance": "high",
+    "durability": "15-20 years",
+    "maintenance": "Wipe with a damp cloth; 100% waterproof and termite-proof."
+  },
+  {
+    "id": "panel-cnc-jali",
+    "name": "CNC geometric jali panels",
+    "category": "panel",
+    "description": "Laser-cut architectural lattice panels (8 × 4 ft sheets) in durable composite/ACP. Adds privacy, ventilation, and ornamental Indian detailing.",
+    "applicable_labels": [
+      "wall",
+      "balcony",
+      "canopy",
+      "louvers",
+      "compound_wall"
+    ],
+    "pricing_unit": "sheet",
+    "measure_basis": "area",
+    "coats": 1,
+    "piece_area_sqft": 32,
+    "wastage_pct": 10,
+    "material_rate": 3900,
+    "labour_rate": 85,
+    "companions": [],
+    "colorable": true,
+    "default_color": "#E5E7EB",
+    "swatch": "panel-cnc-jali.png",
+    "weather_resistance": "high",
+    "durability": "12-15 years",
+    "maintenance": "Dust with a soft brush; wash with mild soap water once a year."
   },
   {
     "id": "railing-toughened-glass",
