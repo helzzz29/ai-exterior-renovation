@@ -2,9 +2,9 @@
 
 import pytest
 
-from app.auth import ensure_seed_users, hash_password
-from app.config import get_settings
-from app.db import session_scope
+from renocore.database import session_scope
+from renocore.identity import ensure_seed_users, hash_password
+from renocore.settings import get_settings
 from tests.integration.conftest import designing, make_client, new_project, upload
 
 

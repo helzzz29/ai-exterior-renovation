@@ -49,7 +49,7 @@ async def test_unusable_files_rejected(client, queue, data: bytes, code: str) ->
 
 
 async def test_too_large_upload(client, queue, monkeypatch) -> None:
-    from app.config import get_settings
+    from renocore.settings import get_settings
 
     monkeypatch.setattr(get_settings(), "max_upload_bytes", 1024)
     pid = await new_project(client)

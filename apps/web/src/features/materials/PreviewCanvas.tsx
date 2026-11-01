@@ -1,9 +1,15 @@
+import { useState } from "react";
 import type { Context } from "konva/lib/Context";
 import { Group, Image as KImage, Layer, Rect, Stage } from "react-konva";
 import type { Assignment, MaterialOut, Point, RegionOut } from "@/api/types";
 import { copy } from "@/copy";
 import { OPENING_LABELS } from "@/lib/labels";
 import { useElementWidth, useImage, useImages } from "@/lib/useImage";
+import {
+  LIGHTING_STYLES,
+  PhotoLightingControl,
+  type LightingMode,
+} from "@/components/PhotoLightingControl";
 
 function clipTo(poly: Point[]) {
   return (ctx: Context) => {
@@ -53,20 +59,33 @@ export function PreviewCanvas({
   const scale = boxWidth > 0 ? boxWidth / imgW : 0;
   const assigned = new Map(assignments.map((a) => [a.region_id, a]));
   const openings = regions.filter((r) => OPENING_LABELS.has(r.label));
+  const [lighting, setLighting] = useState<LightingMode>("day");
+  const lightingStyle = LIGHTING_STYLES[lighting];
   // Back to front: walls first, parts in front of them later, windows and doors last.
   const layered = regions
     .filter((r) => !OPENING_LABELS.has(r.label) && !r.proposed)
     .sort((x, y) => LAYER.indexOf(x.label) - LAYER.indexOf(y.label));
 
   return (
-    <div
-      ref={ref}
-      role="img"
-      aria-label={copy.materials.previewAlt}
-      className="w-full overflow-hidden rounded-lg border bg-muted"
-      style={{ aspectRatio: `${imgW} / ${imgH}` }}
-    >
-      {scale > 0 && (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <p className="text-xs font-medium text-muted-foreground">Interactive Day & Night Facade Preview</p>
+        <PhotoLightingControl mode={lighting} onChange={setLighting} />
+      </div>
+      <div
+        ref={ref}
+        role="img"
+        aria-label={copy.materials.previewAlt}
+        className="relative w-full overflow-hidden rounded-xl border border-border/80 bg-muted/60 transition-all duration-300"
+        style={{ aspectRatio: `${imgW} / ${imgH}`, filter: lightingStyle.filter }}
+      >
+        {lightingStyle.overlayStyle && (
+          <div
+            className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+            style={lightingStyle.overlayStyle}
+          />
+        )}
+        {scale > 0 && (
         <Stage width={boxWidth} height={imgH * scale} scaleX={scale} scaleY={scale} listening={false}>
           <Layer listening={false}>
             {photo && <KImage image={photo} width={imgW} height={imgH} />}
@@ -121,6 +140,7 @@ export function PreviewCanvas({
           </Layer>
         </Stage>
       )}
+      </div>
     </div>
   );
 }

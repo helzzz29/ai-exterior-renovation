@@ -1,5 +1,5 @@
 /**
- * Pure state logic for the "Parts of your house" editor (G2). The canvas and the cards only
+ * Pure state logic for the "Spot the sections" editor (G2). The canvas and the cards only
  * dispatch actions; every rule (what counts as checked, when Continue unlocks, what is saved)
  * lives here so it can be unit-tested without a canvas.
  */

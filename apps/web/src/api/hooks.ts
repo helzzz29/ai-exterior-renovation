@@ -105,6 +105,7 @@ export function useProject(projectId: string) {
   return useQuery<ProjectOut>({
     queryKey: qk.project(projectId),
     queryFn: () => unwrap(api.GET("/api/projects/{project_id}", pp(projectId))),
+    enabled: Boolean(projectId),
   });
 }
 

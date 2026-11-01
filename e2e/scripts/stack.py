@@ -12,7 +12,7 @@ import subprocess
 import sys
 from urllib.parse import urlparse
 
-sys.path.insert(0, os.getcwd())  # so `app` imports from apps/api
+sys.path.insert(0, os.getcwd())  # so `renocore` imports from apps/api
 
 
 def prepare() -> None:
@@ -35,7 +35,7 @@ def api() -> None:
     if sys.platform == "win32":  # psycopg's async mode needs a selector event loop
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     port = int(os.environ.get("E2E_API_PORT", "8010"))
-    uvicorn.run("app.main:app", host="127.0.0.1", port=port, loop="none", log_level="warning")
+    uvicorn.run("renocore.server:app", host="127.0.0.1", port=port, loop="none", log_level="warning")
 
 
 if __name__ == "__main__":

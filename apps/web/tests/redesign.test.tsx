@@ -64,7 +64,7 @@ describe("sign in and the app frame", () => {
     await user.type(screen.getByLabelText("Password"), "password123");
     await user.click(screen.getByRole("button", { name: "Log in" }));
     await waitFor(() => expect(location()).toBe(`/projects/${projectId}/photo`));
-    expect(await screen.findByRole("heading", { name: "Your photo" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Snap your home" })).toBeInTheDocument();
   });
 });
 
@@ -117,9 +117,9 @@ describe("wizard frame", () => {
     const { projectId, designId } = await seed("assigned");
     renderApp(`/projects/${projectId}/cost?design=${designId}`);
     const nav = await screen.findByRole("navigation", { name: "Your progress" });
-    expect(await within(nav).findByRole("link", { name: /Choose materials.*Done/ })).toBeInTheDocument();
-    expect(within(nav).getByRole("link", { name: /Your new look.*Not started/ })).toBeInTheDocument();
-    expect(within(nav).queryByRole("link", { name: /Your new look.*Done/ })).not.toBeInTheDocument();
+    expect(await within(nav).findByRole("link", { name: /Pick finishes.*Done/ })).toBeInTheDocument();
+    expect(within(nav).getByRole("link", { name: /Makeover preview.*Not started/ })).toBeInTheDocument();
+    expect(within(nav).queryByRole("link", { name: /Makeover preview.*Done/ })).not.toBeInTheDocument();
   });
 
   it("keeps the chosen design when a project is reopened by its address", async () => {
@@ -138,12 +138,12 @@ describe("wizard frame", () => {
   it("phones get a compact step menu that lists every step", async () => {
     const { projectId } = await seed("regions");
     const { user } = renderApp(`/projects/${projectId}/parts`);
-    const toggle = await screen.findByRole("button", { name: /Step 2 of 6.*Parts of your house/ });
+    const toggle = await screen.findByRole("button", { name: /Step 2 of 6.*Spot the sections/ });
     expect(toggle).toHaveAttribute("aria-expanded", "false");
     await user.click(toggle);
     const menu = document.getElementById("step-menu")!;
     expect(within(menu).getAllByRole("listitem")).toHaveLength(6);
-    expect(within(menu).getByRole("link", { name: /Your photo/ })).toBeInTheDocument();
+    expect(within(menu).getByRole("link", { name: /Snap your home/ })).toBeInTheDocument();
   });
 });
 
@@ -256,7 +256,7 @@ describe("parts editor", () => {
     const { user } = renderApp(`/projects/${projectId}/parts`);
     await user.click(await screen.findByRole("button", { name: "Pillar Please check" }));
     await user.click(within(screen.getByTestId("check-card")).getByRole("button", { name: "Yes" }));
-    await user.click(screen.getByRole("link", { name: /Your photo/ }));
+    await user.click(screen.getByRole("link", { name: /Snap your home/ }));
     await waitFor(() => expect(db.projects[0].regions.find((r) => r.id === "p-pillar-r")?.checked).toBe(true));
   });
 });
@@ -343,7 +343,7 @@ describe("cost & report", () => {
     const field = await screen.findByLabelText("Material price (₹ per sq ft)");
     await user.clear(field);
     await user.type(field, "321");
-    await user.click(screen.getByRole("link", { name: /Choose materials/ }));
+    await user.click(screen.getByRole("link", { name: /Pick finishes/ }));
     await waitFor(() =>
       expect(db.projects[0].overrides).toEqual([{ material_id: "stone-natural", material_rate: 321, labour_rate: null }]),
     );

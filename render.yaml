@@ -16,7 +16,7 @@ services:
         sync: false
       - key: JEV_API_KEY
         sync: false
-      - key: SEED_USERS # {"email": "argon2 hash", ...} from scripts/make_accounts.py
+      - key: SEED_USERS # {"email": "argon2 hash", ...} from scripts/provision_users.py
         sync: false
       - key: JWT_SECRET
         generateValue: true

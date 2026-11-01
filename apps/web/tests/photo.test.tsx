@@ -8,7 +8,7 @@ function pick(name: string, type = "image/jpeg") {
   fireEvent.change(input, { target: { files: [new File(["x"], name, { type })] } });
 }
 
-describe("Step 1: Your photo", () => {
+describe("Step 1: Snap your home", () => {
   it("uploads, shows progress in plain words, then opens the parts screen", async () => {
     const { projectId } = await seed("upload");
     renderApp(`/projects/${projectId}/photo`);

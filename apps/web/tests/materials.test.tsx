@@ -19,7 +19,7 @@ function wallGroup() {
   return screen.getByRole("radiogroup", { name: /Main wall/ });
 }
 
-describe("Step 4: Choose materials", () => {
+describe("Step 4: Pick finishes", () => {
   it("shows the one design the project starts with", async () => {
     const { projectId } = await seed("designing");
     renderApp(`/projects/${projectId}/materials`);
@@ -50,7 +50,7 @@ describe("Step 4: Choose materials", () => {
     expect(screen.getByText("Saving…")).toBeInTheDocument();
     expect(screen.queryByText("Choices saved")).not.toBeInTheDocument();
     // Leave at once through the stepper, before the automatic save would run.
-    await user.click(screen.getByRole("link", { name: /Size check/ }));
+    await user.click(screen.getByRole("link", { name: /Measure up/ }));
     await waitFor(() =>
       expect(db.designs.find((d) => d.id === designId)?.assignments.map((a) => a.material_id)).toEqual([
         "paint-weathershield",
