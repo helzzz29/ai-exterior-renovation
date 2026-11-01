@@ -60,15 +60,15 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
   };
 
   const featureIcons = [
-    <Layers key="f1" className="size-4 text-emerald-600 shrink-0" />,
-    <Sparkles key="f2" className="size-4 text-emerald-600 shrink-0" />,
-    <Calculator key="f3" className="size-4 text-emerald-600 shrink-0" />,
+    <Layers key="f1" className="size-3.5 text-emerald-600 shrink-0" />,
+    <Sparkles key="f2" className="size-3.5 text-emerald-600 shrink-0" />,
+    <Calculator key="f3" className="size-3.5 text-emerald-600 shrink-0" />,
   ];
 
   return (
-    <main className="min-h-dvh bg-slate-50/50 lg:grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]">
+    <main className="h-dvh max-h-dvh overflow-y-auto lg:overflow-hidden bg-slate-50/50 lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       {/* Left Column: Architectural Showcase & Value Propositions */}
-      <aside className="relative hidden flex-col justify-between overflow-hidden border-r border-emerald-100/80 bg-gradient-to-br from-emerald-50/80 via-white to-emerald-50/40 p-8 text-slate-800 lg:flex xl:p-12">
+      <aside className="relative hidden h-full max-h-dvh flex-col justify-between overflow-hidden border-r border-emerald-100/80 bg-gradient-to-br from-emerald-50/80 via-white to-emerald-50/40 p-6 xl:p-8 text-slate-800 lg:flex">
         {/* Subtle grid pattern background */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.22] [background-image:radial-gradient(#059669_1px,transparent_1px)] [background-size:24px_24px]"
@@ -76,58 +76,55 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
         />
 
         {/* Brand Header */}
-        <div className="relative z-10 flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/25">
-            <House className="size-5" aria-hidden="true" />
+        <div className="relative z-10 flex items-center gap-2.5 shrink-0">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/25">
+            <House className="size-4.5" aria-hidden="true" />
           </div>
-          <div className="flex items-center gap-2.5">
-            <span className="text-xl font-bold tracking-tight text-slate-900">{copy.app.name}</span>
-            <span className="inline-flex items-center rounded-full border border-emerald-200/80 bg-emerald-100/60 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold tracking-tight text-slate-900">{copy.app.name}</span>
+            <span className="inline-flex items-center rounded-full border border-emerald-200/80 bg-emerald-100/60 px-2 py-0.5 text-[11px] font-semibold text-emerald-800">
               {copy.app.tagline}
             </span>
           </div>
         </div>
 
         {/* Central Architectural Elevation Showcase */}
-        <div className="relative z-10 my-4 py-2">
-          <FacadeArt className="mx-auto max-w-lg" />
+        <div className="relative z-10 my-auto py-1 shrink min-h-0 flex items-center justify-center">
+          <FacadeArt className="mx-auto" />
         </div>
 
         {/* Value Proposition & Feature Points */}
-        <div className="relative z-10 max-w-lg space-y-4">
-          <div className="space-y-1">
-            <h2 className="text-xl font-bold leading-snug tracking-tight text-slate-900 xl:text-2xl">
+        <div className="relative z-10 max-w-lg space-y-2.5 shrink-0">
+          <div>
+            <h2 className="text-base xl:text-lg font-bold leading-tight tracking-tight text-slate-900">
               {copy.auth.sideTitle}
             </h2>
-            <p className="text-xs text-slate-500">
-              Transform exterior house photos into realistic architectural makeovers and instant contractor estimates.
-            </p>
           </div>
 
-          <div className="grid gap-2.5">
+          <div className="grid gap-1.5">
             {copy.auth.sidePoints.map((pt, idx) => (
               <div
                 key={pt}
-                className="flex items-start gap-3 rounded-xl border border-emerald-100/90 bg-white/80 p-2.5 shadow-xs backdrop-blur-xs transition hover:border-emerald-200 hover:bg-white"
+                className="flex items-center gap-2.5 rounded-lg border border-emerald-100/90 bg-white/85 px-2.5 py-1.5 shadow-xs backdrop-blur-xs transition hover:border-emerald-200 hover:bg-white"
               >
-                <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100">
-                  {featureIcons[idx] ?? <Check className="size-4 text-emerald-600" />}
+                <div className="flex size-6 shrink-0 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">
+                  {featureIcons[idx] ?? <Check className="size-3 text-emerald-600" />}
                 </div>
-                <div className="text-xs">
-                  <p className="font-semibold text-slate-800">
+                <p className="text-xs text-slate-700 leading-tight">
+                  <span className="font-semibold text-slate-900 mr-1.5">
                     {idx === 0
-                      ? "AI Structure Segmentation"
+                      ? "Structure Detection:"
                       : idx === 1
-                        ? "Real Material Library"
-                        : "Accurate BOQ Costing"}
-                  </p>
-                  <p className="text-slate-600">{pt}</p>
-                </div>
+                        ? "Material Library:"
+                        : "Accurate BOQ:"}
+                  </span>
+                  {pt}
+                </p>
               </div>
             ))}
           </div>
 
-          <div className="flex items-center gap-4 pt-1 text-[11px] text-slate-400 font-medium border-t border-emerald-100/60">
+          <div className="flex items-center gap-3 pt-1 text-[10.5px] text-slate-400 font-medium border-t border-emerald-100/60">
             <span className="flex items-center gap-1">
               <ShieldCheck className="size-3.5 text-emerald-600" /> Grade-A AI Accuracy
             </span>
@@ -140,29 +137,29 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
       </aside>
 
       {/* Right Column: Clean White & Emerald Authentication Form */}
-      <div className="relative grid min-h-dvh place-items-center bg-white px-4 py-10 sm:px-6 lg:min-h-0 lg:bg-slate-50/40">
+      <div className="relative flex h-full max-h-dvh flex-col items-center justify-center overflow-y-auto lg:overflow-hidden bg-white px-4 py-6 sm:px-6 lg:bg-slate-50/40">
         {/* Subtle background glow */}
         <div
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,#ecfdf5,transparent_55%)] opacity-70"
           aria-hidden="true"
         />
 
-        <div className="relative z-10 w-full max-w-md space-y-6">
+        <div className="relative z-10 w-full max-w-md my-auto space-y-4">
           {/* Mobile Header (only visible on small screens) */}
-          <div className="flex flex-col items-center gap-2 text-center lg:hidden">
-            <span className="grid size-12 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20">
-              <House className="size-6" aria-hidden="true" />
+          <div className="flex flex-col items-center gap-1.5 text-center lg:hidden">
+            <span className="grid size-10 place-items-center rounded-xl bg-emerald-600 text-white shadow-md shadow-emerald-600/20">
+              <House className="size-5" aria-hidden="true" />
             </span>
-            <p className="text-2xl font-bold tracking-tight text-slate-900">{copy.app.name}</p>
-            <p className="max-w-xs text-sm text-slate-500">{copy.app.tagline}</p>
+            <p className="text-xl font-bold tracking-tight text-slate-900">{copy.app.name}</p>
+            <p className="max-w-xs text-xs text-slate-500">{copy.app.tagline}</p>
           </div>
 
           {/* Elevated Auth Card */}
-          <Card className="overflow-hidden rounded-2xl border border-emerald-100/90 bg-white shadow-xl shadow-slate-200/50">
+          <Card className="overflow-hidden rounded-2xl border border-emerald-100/90 bg-white shadow-lg shadow-slate-200/50">
             {/* Top decorative emerald gradient bar */}
             <div className="h-1.5 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-400" />
 
-            <CardHeader className="pt-6 sm:pt-7">
+            <CardHeader className="p-5 pb-2 sm:p-6 sm:pb-3">
               <div className="mb-1 flex items-center justify-between">
                 <span className="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-800 border border-emerald-200/60">
                   <House className="size-3 text-emerald-600" />
@@ -186,16 +183,16 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                 )}
               </div>
 
-              <h1 className="text-2xl font-bold leading-tight tracking-tight text-slate-900">
+              <h1 className="text-xl sm:text-2xl font-bold leading-tight tracking-tight text-slate-900">
                 {isLogin ? copy.auth.loginTitle : copy.auth.registerTitle}
               </h1>
-              <CardDescription className="text-slate-500">
+              <CardDescription className="text-xs sm:text-sm text-slate-500">
                 {isLogin ? copy.auth.loginIntro : copy.auth.registerIntro}
               </CardDescription>
             </CardHeader>
 
-            <CardContent className="pb-7 sm:pb-8">
-              <form className="space-y-4" onSubmit={onSubmit} noValidate>
+            <CardContent className="p-5 pt-0 sm:p-6 sm:pt-0 pb-5 sm:pb-6">
+              <form className="space-y-3.5" onSubmit={onSubmit} noValidate>
                 <Field
                   id="email"
                   label={copy.auth.email}
@@ -215,11 +212,11 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                           setEmail(e.target.value);
                           if (errors.email) setErrors((x) => ({ ...x, email: undefined }));
                         }}
-                        className="h-11 rounded-xl border-slate-200 pl-10 text-sm focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20"
+                        className="h-10 rounded-xl border-slate-200 pl-9 text-sm focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20"
                         required
                       />
                       <Mail
-                        className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400"
+                        className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400"
                         aria-hidden="true"
                       />
                     </div>
@@ -246,11 +243,11 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                           setPassword(e.target.value);
                           if (errors.password) setErrors((x) => ({ ...x, password: undefined }));
                         }}
-                        className="h-11 rounded-xl border-slate-200 pl-10 pr-20 text-sm focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20"
+                        className="h-10 rounded-xl border-slate-200 pl-9 pr-16 text-sm focus-visible:border-emerald-500 focus-visible:ring-emerald-500/20"
                         required
                       />
                       <Lock
-                        className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400"
+                        className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400"
                         aria-hidden="true"
                       />
                       <Button
@@ -258,7 +255,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                         variant="ghost"
                         size="sm"
                         aria-controls="password"
-                        className="absolute right-1.5 top-1/2 h-8 -translate-y-1/2 rounded-lg px-2.5 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                        className="absolute right-1 top-1/2 h-7 -translate-y-1/2 rounded-lg px-2 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                         onClick={() => setShowPassword((v) => !v)}
                       >
                         {showPassword ? copy.auth.hidePassword : copy.auth.showPassword}
@@ -271,7 +268,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
 
                 <Button
                   type="submit"
-                  className="h-11 w-full rounded-xl bg-emerald-600 text-sm font-semibold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700 active:bg-emerald-800"
+                  className="h-10.5 w-full rounded-xl bg-emerald-600 text-sm font-semibold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700 active:bg-emerald-800"
                   size="lg"
                   pending={login.isPending}
                 >
@@ -291,7 +288,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
               </form>
 
               {SIGNUP_OPEN ? (
-                <div className="mt-6 border-t border-slate-100 pt-5 text-center text-sm">
+                <div className="mt-4 border-t border-slate-100 pt-3.5 text-center text-xs sm:text-sm">
                   <Link
                     className="font-medium text-emerald-700 transition hover:text-emerald-800 hover:underline underline-offset-4"
                     to={isLogin ? "/register" : "/login"}
@@ -300,7 +297,7 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                   </Link>
                 </div>
               ) : (
-                <p className="mt-6 border-t border-slate-100 pt-5 text-center text-xs text-slate-500">
+                <p className="mt-4 border-t border-slate-100 pt-3.5 text-center text-xs text-slate-500">
                   {copy.auth.inviteOnly}
                 </p>
               )}
@@ -308,8 +305,8 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
           </Card>
 
           {/* Bottom Security & Privacy Badge */}
-          <div className="flex items-center justify-center gap-2 text-center text-xs text-slate-400">
-            <ShieldCheck className="size-4 text-emerald-600" />
+          <div className="flex items-center justify-center gap-1.5 text-center text-[11px] text-slate-400">
+            <ShieldCheck className="size-3.5 text-emerald-600" />
             <span>256-bit encrypted • Private project workspace</span>
           </div>
         </div>

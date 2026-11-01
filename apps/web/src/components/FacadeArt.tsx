@@ -6,27 +6,27 @@ import { cn } from "@/lib/utils";
  */
 export function FacadeArt({ className }: { className?: string }) {
   return (
-    <div className={cn("relative mx-auto w-full max-w-lg select-none", className)}>
+    <div className={cn("relative mx-auto w-full max-w-md select-none", className)}>
       {/* Container Card with subtle shadow and border */}
-      <div className="overflow-hidden rounded-2xl border border-emerald-100/90 bg-white/95 p-3.5 shadow-xl shadow-emerald-950/5 backdrop-blur-sm">
+      <div className="overflow-hidden rounded-xl border border-emerald-100/90 bg-white/95 p-2.5 shadow-lg shadow-emerald-950/5 backdrop-blur-sm sm:p-3">
         {/* Mockup Header Toolbar */}
-        <div className="mb-2.5 flex items-center justify-between border-b border-slate-100 pb-2 px-1 text-xs">
+        <div className="mb-1.5 flex items-center justify-between border-b border-slate-100 pb-1.5 px-0.5 text-[11px]">
           <div className="flex items-center gap-1.5">
             <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="font-semibold text-slate-700">AI Facade Scan & Elevation</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="rounded bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700 border border-emerald-200/60">
+          <div className="flex items-center gap-1.5">
+            <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-700 border border-emerald-200/60">
               Grade A (84/100)
             </span>
-            <span className="text-[11px] font-medium text-slate-400">Scale: 1:50</span>
+            <span className="text-[10px] font-medium text-slate-400">1:50</span>
           </div>
         </div>
 
         {/* Architectural Elevation SVG */}
         <svg
           viewBox="0 0 420 270"
-          className="h-auto w-full rounded-xl bg-gradient-to-b from-sky-50/60 via-slate-50/40 to-emerald-50/30"
+          className="h-auto max-h-[190px] xl:max-h-[220px] w-full rounded-lg bg-gradient-to-b from-sky-50/60 via-slate-50/40 to-emerald-50/30 object-contain"
           aria-hidden="true"
           focusable="false"
         >
@@ -174,52 +174,51 @@ export function FacadeArt({ className }: { className?: string }) {
           {/* OVERLAY AI DETECTION PINS & CALLOUTS */}
           {/* Pin 1: Teak Battens */}
           <g>
-            <circle cx="95" cy="78" r="4.5" fill="#10b981" />
-            <circle cx="95" cy="78" r="2" fill="#ffffff" />
+            <circle cx="95" cy="78" r="4" fill="#10b981" />
+            <circle cx="95" cy="78" r="1.8" fill="#ffffff" />
             <line x1="95" y1="73" x2="95" y2="24" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
-            <rect x="52" y="10" width="86" height="18" rx="4" fill="#0f172a" fillOpacity="0.85" />
-            <text x="58" y="22" fill="#ffffff" fontSize="9" fontWeight="600" fontFamily="sans-serif">
+            <rect x="52" y="10" width="86" height="17" rx="3.5" fill="#0f172a" fillOpacity="0.85" />
+            <text x="58" y="21.5" fill="#ffffff" fontSize="8.5" fontWeight="600" fontFamily="sans-serif">
               Teak Battens • 340 sq.ft
             </text>
           </g>
 
           {/* Pin 2: Double Glazing */}
           <g>
-            <circle cx="240" cy="80" r="4.5" fill="#10b981" />
-            <circle cx="240" cy="80" r="2" fill="#ffffff" />
+            <circle cx="240" cy="80" r="4" fill="#10b981" />
+            <circle cx="240" cy="80" r="1.8" fill="#ffffff" />
             <line x1="240" y1="75" x2="258" y2="24" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
-            <rect x="252" y="10" width="94" height="18" rx="4" fill="#0f172a" fillOpacity="0.85" />
-            <text x="258" y="22" fill="#ffffff" fontSize="9" fontWeight="600" fontFamily="sans-serif">
+            <rect x="252" y="10" width="94" height="17" rx="3.5" fill="#0f172a" fillOpacity="0.85" />
+            <text x="258" y="21.5" fill="#ffffff" fontSize="8.5" fontWeight="600" fontFamily="sans-serif">
               Low-E Glass • 120 sq.ft
             </text>
           </g>
 
           {/* Pin 3: Travertine Stone */}
           <g>
-            <circle cx="110" cy="188" r="4.5" fill="#10b981" />
-            <circle cx="110" cy="188" r="2" fill="#ffffff" />
+            <circle cx="110" cy="188" r="4" fill="#10b981" />
+            <circle cx="110" cy="188" r="1.8" fill="#ffffff" />
             <line x1="110" y1="193" x2="70" y2="246" stroke="#10b981" strokeWidth="1" strokeDasharray="2 2" />
-            <rect x="20" y="244" width="105" height="18" rx="4" fill="#0f172a" fillOpacity="0.85" />
-            <text x="26" y="256" fill="#ffffff" fontSize="9" fontWeight="600" fontFamily="sans-serif">
+            <rect x="20" y="244" width="105" height="17" rx="3.5" fill="#0f172a" fillOpacity="0.85" />
+            <text x="26" y="255.5" fill="#ffffff" fontSize="8.5" fontWeight="600" fontFamily="sans-serif">
               Travertine Stone • 480 sq.ft
             </text>
           </g>
         </svg>
 
         {/* Mockup Footer Card with BOQ Metrics */}
-        <div className="mt-2.5 flex items-center justify-between rounded-xl bg-slate-50 border border-slate-200/60 px-3 py-2 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="flex size-5 items-center justify-center rounded-md bg-emerald-600 text-[10px] font-bold text-white">
+        <div className="mt-1.5 flex items-center justify-between rounded-lg bg-slate-50 border border-slate-200/60 px-2.5 py-1 text-xs">
+          <div className="flex items-center gap-1.5">
+            <span className="flex size-4 items-center justify-center rounded bg-emerald-600 text-[9px] font-bold text-white">
               ₹
             </span>
-            <div>
-              <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Estimated Makeover</p>
-              <p className="text-sm font-bold text-slate-800">₹4,85,000</p>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-[10px] uppercase font-semibold text-slate-400">Makeover Est:</span>
+              <span className="text-xs font-bold text-slate-800">₹4,85,000</span>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-400">Total Net Area</p>
-            <p className="text-xs font-semibold text-emerald-700">940 sq.ft • 3 Materials</p>
+            <span className="text-[11px] font-semibold text-emerald-700">940 sq.ft • 3 Finishes</span>
           </div>
         </div>
       </div>
