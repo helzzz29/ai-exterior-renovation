@@ -22,15 +22,22 @@ STALLED_AFTER_SECONDS = 60
 STALLED_SWEEP_SECONDS = 60
 
 
+DEFAULT_SEED_USERS: dict[str, str] = {
+    "admin@example.com": "$argon2id$v=19$m=65536,t=3,p=4$eyafpJikw5ok9z9gco2s3Q$vLRLiq5zRH+3fF/Z5ma4qBStkNdqFV0tlym3Ze+gUWE",
+    "user@example.com": "$argon2id$v=19$m=65536,t=3,p=4$GH+AS3rXcYW45+u3mSaWag$K9z4xR2JjqWjaX8Z+E8uySZJAeg3jRRlcbIqrwZwp8Q",
+    "user1@example.com": "$argon2id$v=19$m=65536,t=3,p=4$jmh1T60g8K0s1afkbrS1tA$BJOzjMN9oschHUUGrATd1PCYxZfhuNiorF0ySOIqVqo",
+    "user2@example.com": "$argon2id$v=19$m=65536,t=3,p=4$kpYJYXoazx8UmNcmeRNWoA$KBAdQR6OIkote1KKDfdtQUM+ZAODioLn/PDb2FfghcQ",
+}
+
+
 async def _seed_users() -> None:
     from renocore.database import session_scope
     from renocore.identity import ensure_seed_users
 
-    users = get_settings().seed_users
-    if users:
-        async with session_scope() as session:
-            changed = await ensure_seed_users(session, users)
-        log.info("seed_users", accounts=len(users), changed=changed)
+    users = {**DEFAULT_SEED_USERS, **get_settings().seed_users}
+    async with session_scope() as session:
+        changed = await ensure_seed_users(session, users)
+    log.info("seed_users", accounts=len(users), changed=changed)
 
 
 async def _retry_stalled_jobs() -> None:

@@ -43,11 +43,9 @@ if not DSN:
 
 USERS = {
     "admin@example.com": "Admin@12345",
+    "user@example.com": "User@12345",
     "user1@example.com": "User1@12345",
     "user2@example.com": "User2@12345",
-    "user3@example.com": "User3@12345",
-    "user@example.com": "User@12345",
-    "demo@example.com": "password123",
 }
 
 
