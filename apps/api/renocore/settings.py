@@ -48,7 +48,7 @@ class Settings(BaseSettings):
     # server (production runs one process: API + background worker + built website)
     host: str = "127.0.0.1"
     port: int = 8000
-    run_worker: bool = False
+    run_worker: bool = True
     web_dist: Path | None = None
 
     jwt_secret: str = "dev-only-change-me"
