@@ -77,10 +77,16 @@ class Settings(BaseSettings):
     @field_validator("database_url")
     @classmethod
     def _asyncpg_url(cls, url: str) -> str:
-        """Accept a plain `postgresql://...?sslmode=require` URL (as Neon gives it)."""
-        for prefix in ("postgres://", "postgresql://"):
+        """Accept a plain `postgresql://...?sslmode=require` URL (as Neon gives it) or driver schemes."""
+        for prefix in (
+            "postgresql+psycopg2://",
+            "postgresql+psycopg://",
+            "postgresql://",
+            "postgres://",
+        ):
             if url.startswith(prefix):
                 url = "postgresql+asyncpg://" + url[len(prefix) :]
+                break
         base, _, query = url.partition("?")
         params = []
         for part in filter(None, query.split("&")):
@@ -94,9 +100,15 @@ class Settings(BaseSettings):
     def queue_dsn(self) -> str:
         """libpq/psycopg DSN for Procrastinate (same database as SQLAlchemy)."""
         url = self.database_url
-        for prefix in ("postgresql+asyncpg://", "postgresql+psycopg://", "postgres://"):
+        for prefix in (
+            "postgresql+asyncpg://",
+            "postgresql+psycopg2://",
+            "postgresql+psycopg://",
+            "postgres://",
+        ):
             if url.startswith(prefix):
                 url = "postgresql://" + url[len(prefix) :]
+                break
         base, _, query = url.partition("?")
         parts = filter(None, query.split("&"))
         params = ["sslmode=" + p[4:] if p.startswith("ssl=") else p for p in parts]
