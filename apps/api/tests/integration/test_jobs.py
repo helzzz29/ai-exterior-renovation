@@ -4,8 +4,8 @@ import asyncio
 
 from sqlalchemy import select
 
-from app.db import session_scope
-from app.models import JobRun
+from renocore.database import session_scope
+from renocore.tables import JobRun
 from tests.integration.conftest import designing, new_project, upload
 
 
@@ -134,7 +134,7 @@ async def test_superseded_analysis_is_ignored(client, run_jobs, provider) -> Non
 
 
 async def test_step_strings_are_plain_language(client, run_jobs, monkeypatch) -> None:
-    from app.services import jobs as jobs_svc
+    from renocore.operations import job_runner as jobs_svc
 
     steps: list[str] = []
     original = jobs_svc.JobCtx.set_step

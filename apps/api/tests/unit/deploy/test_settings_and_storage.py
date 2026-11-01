@@ -6,8 +6,8 @@ import pytest
 from botocore.exceptions import ClientError
 from fastapi.testclient import TestClient
 
-from app.config import Settings
-from app.storage import S3Storage
+from renocore.blobstore import S3Storage
+from renocore.settings import Settings
 
 
 def test_neon_url_is_accepted_as_given() -> None:
@@ -82,8 +82,8 @@ def test_s3_from_settings_points_at_the_endpoint() -> None:
 
 
 def test_website_is_served_with_client_side_routes(tmp_path, monkeypatch) -> None:
-    from app import main
-    from app.config import get_settings
+    from renocore import server as main
+    from renocore.settings import get_settings
 
     (tmp_path / "assets").mkdir()
     (tmp_path / "index.html").write_text("<div id=root></div>")

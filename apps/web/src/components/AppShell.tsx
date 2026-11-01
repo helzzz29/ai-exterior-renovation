@@ -1,7 +1,14 @@
 import { useState, type ReactNode } from "react";
-import { FolderOpen, House, LogOut, Menu, PlusCircle, Sparkles, X } from "lucide-react";
+import {
+  Folder,
+  House,
+  LogOut,
+  Menu,
+  Plus,
+  X,
+} from "lucide-react";
 import { Link, Navigate, Outlet, useLocation, useNavigate } from "react-router";
-import { useLogout, useMe } from "@/api/hooks";
+import { useLogout, useMe, useProject } from "@/api/hooks";
 import { copy } from "@/copy";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,7 +34,6 @@ export function RequireAuth({ children }: { children: ReactNode }) {
     );
   }
   if (!me.data) {
-    // Remember the whole address (including ?design=) so the user lands back on the same screen.
     return <Navigate to="/login" replace state={{ from: `${location.pathname}${location.search}` }} />;
   }
   return <>{children}</>;
@@ -40,121 +46,99 @@ export function AppShell() {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Extract projectId if currently inside a project route: /projects/:projectId/...
+  const projectMatch = pathname.match(/^\/projects\/([a-zA-Z0-9_-]+)/);
+  const activeProjectId = projectMatch && projectMatch[1] !== "new" ? projectMatch[1] : null;
+  const activeProject = useProject(activeProjectId ?? "");
   const onProjects = pathname === "/" || pathname === "/projects";
   const onNew = pathname === "/projects/new";
 
   return (
-    <div className="flex min-h-dvh bg-background text-foreground">
-      {/* Mobile Backdrop */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-
-      {/* Desktop & Mobile Sidebar */}
-      <aside
-        className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-border/80 bg-card/95 transition-transform duration-300 md:translate-x-0",
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
-        )}
-      >
-        {/* Brand Header */}
-        <div className="flex h-16 items-center justify-between border-b border-border/80 px-5">
-          <Link
-            to="/"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center gap-3 font-semibold tracking-tight"
-          >
-            <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-primary to-primary-hover text-primary-foreground shadow-md ring-1 ring-primary/30">
-              <House className="size-4.5" aria-hidden="true" />
-            </span>
-            <div className="flex flex-col">
-              <span className="text-base font-bold leading-none tracking-tight text-foreground">
-                {copy.app.name}
+    <div className="min-h-dvh bg-background text-foreground flex flex-col font-sans">
+      {/* Top Navigation Bar — Matching Reference Picture 2 */}
+      <header className="sticky top-0 z-40 border-b border-border/80 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Left Brand & Primary Tabs */}
+          <div className="flex items-center gap-6 lg:gap-8">
+            {/* Brand Logo & Name */}
+            <Link to="/" aria-label="Home Makeover Planner: my projects" className="flex items-center gap-2.5 group">
+              <span className="grid size-9 place-items-center rounded-xl bg-emerald-700 text-white shadow-xs transition-transform group-hover:scale-105">
+                <House className="size-5" />
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-primary">
-                Exterior Studio
-              </span>
-            </div>
-          </Link>
-          <button
-            type="button"
-            className="rounded-lg p-1.5 text-muted-foreground hover:bg-muted md:hidden"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Close sidebar"
-          >
-            <X className="size-5" />
-          </button>
-        </div>
+              <div className="flex flex-col">
+                <span className="text-base font-extrabold leading-none tracking-tight text-slate-900 uppercase">
+                  Renova AI
+                </span>
+                <span className="text-[10px] font-semibold text-emerald-700 tracking-normal mt-0.5">
+                  Exterior Cost &amp; Design
+                </span>
+              </div>
+            </Link>
 
-        {/* Sidebar Navigation */}
-        <div className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
-          <div>
-            <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/80">
-              Workspace
-            </p>
-            <nav className="space-y-1">
+            {/* Nav Tabs Matching Picture 2 */}
+            <nav aria-label="Main" className="hidden md:flex items-center gap-1 self-stretch pt-1">
               <Link
                 to="/"
-                onClick={() => setMobileOpen(false)}
+                aria-current={onProjects ? "page" : undefined}
                 className={cn(
-                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  "relative flex items-center gap-2 px-3 py-2 text-sm font-semibold transition-colors",
                   onProjects
-                    ? "bg-primary/10 text-primary font-semibold"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "text-emerald-700 after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-emerald-600 after:rounded-full"
+                    : "text-slate-600 hover:text-slate-900",
                 )}
               >
-                <FolderOpen className="size-4.5" />
-                <span>{copy.nav.myProjects}</span>
+                <Folder className="size-4" />
+                <span>My projects</span>
               </Link>
 
               <Link
                 to="/projects/new"
-                onClick={() => setMobileOpen(false)}
                 className={cn(
-                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  "relative flex items-center gap-2 px-3 py-2 text-sm font-semibold transition-colors",
                   onNew
-                    ? "bg-primary/10 text-primary font-semibold"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "text-emerald-700 after:absolute after:bottom-0 after:left-2 after:right-2 after:h-0.5 after:bg-emerald-600 after:rounded-full"
+                    : "text-slate-600 hover:text-slate-900",
                 )}
               >
-                <PlusCircle className="size-4.5" />
-                <span>New Project</span>
+                <Plus className="size-4" />
+                <span>New Renovation</span>
               </Link>
             </nav>
+
+            {/* Active Project Breadcrumb (if inside project) */}
+            {activeProjectId && activeProject.data && (
+              <div className="hidden lg:flex items-center gap-2 border-l border-slate-200 pl-4 text-xs">
+                <span className="text-slate-400">Project:</span>
+                <span className="font-bold text-slate-800 max-w-[180px] truncate">
+                  {activeProject.data.name}
+                </span>
+              </div>
+            )}
           </div>
 
-          <div className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/5 via-card to-primary/10 p-4">
-            <div className="flex items-center gap-2 text-primary">
-              <Sparkles className="size-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">AI Powered</span>
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Instant exterior segmentation, material swapping & cost breakdowns.
-            </p>
-          </div>
-        </div>
+          {/* Right User & Actions */}
+          <div className="flex items-center gap-3">
+            {IS_MOCK && (
+              <Badge variant="warning" title={copy.app.demoBadge} className="hidden sm:inline-flex font-medium text-xs">
+                {copy.app.demoShort}
+              </Badge>
+            )}
 
-        {/* User Card & Logout */}
-        <div className="border-t border-border/80 p-3">
-          <div className="flex items-center justify-between rounded-xl bg-muted/40 p-2.5">
-            <div className="flex min-w-0 items-center gap-2.5">
-              <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary/20 text-xs font-bold text-primary">
+            {/* User Profile Info Pill */}
+            <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/80 px-3 py-1.5 text-xs text-slate-700">
+              <span className="grid size-5 place-items-center rounded-full bg-emerald-600 text-[10px] font-bold text-white">
                 {me.data?.email ? me.data.email[0].toUpperCase() : "U"}
               </span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-semibold text-foreground">
-                  {me.data?.email?.split("@")[0] ?? "User"}
-                </p>
-                <p className="truncate text-[10px] text-muted-foreground">{me.data?.email}</p>
-              </div>
+              <span className="font-medium text-slate-700 max-w-[140px] truncate">
+                {me.data?.email ?? "user@example.com"}
+              </span>
             </div>
+
+            {/* Sign Out Button */}
             <Button
               variant="ghost"
               size="sm"
-              className="size-8 p-0 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+              className="size-8 p-0 text-slate-500 hover:bg-slate-100 hover:text-slate-900"
               disabled={logout.isPending}
               onClick={() => logout.mutate(undefined, { onSettled: () => navigate("/login") })}
               title={copy.nav.logOut}
@@ -162,46 +146,68 @@ export function AppShell() {
               <LogOut className="size-4" />
               <span className="sr-only">{copy.nav.logOut}</span>
             </Button>
-          </div>
-        </div>
-      </aside>
 
-      {/* Main Container */}
-      <div className="flex min-h-dvh flex-1 flex-col md:pl-64">
-        {/* Top Navbar */}
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/80 bg-card/80 px-4 backdrop-blur-md sm:px-6">
-          <div className="flex items-center gap-3">
+            {/* Mobile Hamburger Button */}
             <button
               type="button"
-              className="rounded-lg p-2 text-muted-foreground hover:bg-muted md:hidden"
-              onClick={() => setMobileOpen(true)}
-              aria-label="Open sidebar"
+              className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 md:hidden"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle navigation menu"
             >
-              <Menu className="size-5" />
+              {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
-            <span className="text-sm font-medium text-muted-foreground">
-              {onProjects ? "Overview" : onNew ? "New Project" : "Studio"}
-            </span>
           </div>
+        </div>
 
-          <div className="flex items-center gap-3">
-            {IS_MOCK && (
-              <Badge variant="warning" title={copy.app.demoBadge} className="font-medium">
-                {copy.app.demoShort}
-              </Badge>
+        {/* Mobile Navigation Drawer */}
+        {mobileOpen && (
+          <div className="border-t border-slate-200 bg-white px-4 py-3 md:hidden space-y-2 animate-in slide-in-from-top-2">
+            <Link
+              to="/"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold",
+                onProjects ? "bg-emerald-50 text-emerald-800" : "text-slate-700 hover:bg-slate-50",
+              )}
+            >
+              <Folder className="size-4 text-emerald-600" />
+              <span>My projects</span>
+            </Link>
+            <Link
+              to="/projects/new"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-semibold",
+                onNew ? "bg-emerald-50 text-emerald-800" : "text-slate-700 hover:bg-slate-50",
+              )}
+            >
+              <Plus className="size-4 text-emerald-600" />
+              <span>New Renovation</span>
+            </Link>
+            {activeProjectId && activeProject.data && (
+              <div className="rounded-lg bg-slate-50 p-2.5 text-xs text-slate-700">
+                <span className="text-[10px] uppercase font-bold text-slate-400">Current Project:</span>
+                <p className="font-bold text-slate-900 mt-0.5 truncate">{activeProject.data.name}</p>
+              </div>
             )}
-            <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-400">
-              <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              System Online
+            <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span className="truncate">{me.data?.email}</span>
+              <button
+                type="button"
+                onClick={() => logout.mutate(undefined, { onSettled: () => navigate("/login") })}
+                className="text-red-600 font-semibold hover:underline"
+              >
+                Log Out
+              </button>
             </div>
           </div>
-        </header>
+        )}
+      </header>
 
-        {/* Page Content */}
-        <main id="main" tabIndex={-1} className="flex-1 px-4 py-6 sm:px-8 sm:py-8 outline-none">
-          <Outlet />
-        </main>
-      </div>
+      {/* Main Page Canvas */}
+      <main id="main" tabIndex={-1} className="flex-1 w-full max-w-7xl mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8 outline-none">
+        <Outlet />
+      </main>
     </div>
   );
 }

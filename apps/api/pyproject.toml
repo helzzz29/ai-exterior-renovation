@@ -64,4 +64,4 @@ ignore = ["B008"]
 [tool.coverage.run]
 # SQLAlchemy asyncio runs code in greenlets; without this, lines after DB calls are not traced
 concurrency = ["greenlet", "thread"]
-omit = ["app/migrations/versions/*"]
+omit = ["renocore/revisions/versions/*"]

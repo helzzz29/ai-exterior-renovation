@@ -1,8 +1,8 @@
 """Configurable AIProvider test double for the API tests.
 
 Only the model calls (C1-C6) are faked; the real AI rules (verdict, labels, proposals) and the
-real render loop (app.ai.render_design) run on top of it. Imaging and estimation are real.
-Unlike app.ai.FakeProvider (recorded fixtures), this one lets a test pick the scenario
+real render loop (renocore.vision.render_design) run on top of it. Imaging and estimation are real.
+Unlike renocore.vision.FakeProvider (recorded fixtures), this one lets a test pick the scenario
 (warn / reject photo, unsure labels, QA failures, provider errors) and counts calls.
 """
 
@@ -12,9 +12,8 @@ from dataclasses import dataclass, field
 from PIL import Image as PILImage
 from PIL.Image import Image
 
-from app import imaging
-from app.domain.ai import AICallRecord, AICallRecorder
-from app.domain.models import (
+from renocore import pixels
+from renocore.schemas.entities import (
     BoxFraction,
     BoxResult,
     ChoiceResult,
@@ -27,6 +26,7 @@ from app.domain.models import (
     WholePhotoAnswers,
     Zone,
 )
+from renocore.schemas.vision_io import AICallRecord, AICallRecorder
 
 # ---------------------------------------------------------------- provider
 
@@ -130,7 +130,7 @@ class FakeProvider:
                 SegmentCandidate(
                     label_hint=label,
                     polygon=poly,
-                    box=imaging.polygon_box(poly),
+                    box=pixels.polygon_box(poly),
                 )
             )
         return out

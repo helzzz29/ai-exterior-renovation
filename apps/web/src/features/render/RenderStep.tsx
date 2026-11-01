@@ -27,6 +27,11 @@ import { cn } from "@/lib/utils";
 import { BackLink, DesignBar } from "@/features/wizard/DesignBar";
 import { useWizard } from "@/features/wizard/context";
 import { useActiveDesign } from "@/features/wizard/useActiveDesign";
+import {
+  LIGHTING_STYLES,
+  PhotoLightingControl,
+  type LightingMode,
+} from "@/components/PhotoLightingControl";
 
 const NOTE_MAX = 500;
 
@@ -79,6 +84,9 @@ function CreatingPanel({ render, costLink }: { render: RenderOut; costLink: stri
 function Compare({ before, after }: { before: string; after: string }) {
   const slider = useReactCompareSliderRef();
   const [view, setView] = useState<"before" | "compare" | "after">("compare");
+  const [lighting, setLighting] = useState<LightingMode>("day");
+  const lightingStyle = LIGHTING_STYLES[lighting];
+
   const show = (v: typeof view) => {
     setView(v);
     // The divider position is "how much of the before photo shows".
@@ -91,27 +99,8 @@ function Compare({ before, after }: { before: string; after: string }) {
   ];
   return (
     <div className="space-y-3">
-      <div className="relative overflow-hidden rounded-2xl border bg-muted shadow-card">
-        <ReactCompareSlider
-          ref={slider}
-          aria-label={copy.look.sliderLabel}
-          keyboardIncrement="5%"
-          onPositionChange={(p) => setView(p >= 99 ? "before" : p <= 1 ? "after" : "compare")}
-          itemOne={<ReactCompareSliderImage src={before} alt={copy.look.before} />}
-          itemTwo={<ReactCompareSliderImage src={after} alt={copy.look.after} />}
-        />
-        <span aria-hidden="true" className="pointer-events-none absolute top-3 left-3 rounded-full bg-foreground/70 px-2.5 py-1 text-xs font-semibold text-background backdrop-blur-sm">
-          {copy.look.before}
-        </span>
-        <span aria-hidden="true" className="pointer-events-none absolute top-3 right-3 rounded-full bg-primary/90 px-2.5 py-1 text-xs font-semibold text-primary-foreground backdrop-blur-sm">
-          {copy.look.after}
-        </span>
-      </div>
-      <div role="group" aria-label={copy.look.viewLabel} className="flex flex-wrap items-center justify-between gap-2">
-        <p className="text-xs text-muted-foreground" aria-hidden="true">
-          {copy.look.sliderLabel}
-        </p>
-        <div className="inline-flex rounded-lg bg-muted p-1">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border/70 bg-card/60 px-4 py-2.5 backdrop-blur-sm">
+        <div role="group" aria-label={copy.look.viewLabel} className="inline-flex rounded-lg bg-muted p-1">
           {options.map(({ v, label }) => (
             <button
               key={v}
@@ -127,6 +116,33 @@ function Compare({ before, after }: { before: string; after: string }) {
             </button>
           ))}
         </div>
+        <PhotoLightingControl mode={lighting} onChange={setLighting} />
+      </div>
+
+      <div
+        className="relative overflow-hidden rounded-2xl border border-border/80 bg-muted shadow-card transition-all duration-300"
+        style={{ filter: lightingStyle.filter }}
+      >
+        {lightingStyle.overlayStyle && (
+          <div
+            className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+            style={lightingStyle.overlayStyle}
+          />
+        )}
+        <ReactCompareSlider
+          ref={slider}
+          aria-label={copy.look.sliderLabel}
+          keyboardIncrement="5%"
+          onPositionChange={(p) => setView(p >= 99 ? "before" : p <= 1 ? "after" : "compare")}
+          itemOne={<ReactCompareSliderImage src={before} alt={copy.look.before} />}
+          itemTwo={<ReactCompareSliderImage src={after} alt={copy.look.after} />}
+        />
+        <span aria-hidden="true" className="pointer-events-none absolute top-3 left-3 z-20 rounded-full bg-foreground/75 px-3 py-1 text-xs font-semibold text-background backdrop-blur-md">
+          {copy.look.before}
+        </span>
+        <span aria-hidden="true" className="pointer-events-none absolute top-3 right-3 z-20 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground shadow-md backdrop-blur-md">
+          {copy.look.after}
+        </span>
       </div>
     </div>
   );

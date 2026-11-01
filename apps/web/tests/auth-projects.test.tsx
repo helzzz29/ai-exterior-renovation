@@ -85,7 +85,7 @@ describe("My projects", () => {
     await user.click(screen.getByRole("button", { name: "Create project" }));
     await waitFor(() => expect(location()).toMatch(/\/projects\/.+\/photo$/));
     expect(db.projects[0].measurements.facade_width_ft).toBe(31);
-    expect(await screen.findByRole("heading", { name: "Your photo" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Snap your home" })).toBeInTheDocument();
   });
 
   it("opens a project at the step it has reached", async () => {

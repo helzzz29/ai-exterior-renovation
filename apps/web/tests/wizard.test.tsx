@@ -9,8 +9,8 @@ describe("wizard shell", () => {
     renderApp(`/projects/${projectId}/parts`);
     const nav = await screen.findByRole("navigation", { name: "Your progress" });
     expect(nav).toHaveTextContent("Finish the earlier steps first");
-    expect(screen.getByRole("link", { name: /Parts of your house/ })).toHaveAttribute("aria-current", "step");
-    expect(screen.queryByRole("link", { name: /Cost & report/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Spot the sections/ })).toHaveAttribute("aria-current", "step");
+    expect(screen.queryByRole("link", { name: /Budget & summary/ })).not.toBeInTheDocument();
   });
 
   it("keeps the AI trace in a closed panel, in friendly words", async () => {

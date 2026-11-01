@@ -193,7 +193,7 @@ async def test_catalogue_price_change_keeps_the_new_look(
 ) -> None:  # noqa: ANN001
     """A new price or can size in the catalogue re-prices the estimate but never asks for a
     new (paid) picture; a new swatch does."""
-    from app.services import catalogue
+    from renocore.operations import materials_catalog as catalogue
 
     pid, did = await report_ready(client, run_jobs)
     cat = dict(catalogue.get_catalogue())

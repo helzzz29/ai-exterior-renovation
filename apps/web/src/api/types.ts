@@ -42,7 +42,7 @@ export type AICallOut = S["AICallOut"];
 export type ScaleResult = S["ScaleResult"];
 export type MaterialCategory = MaterialOut["category"];
 
-/** Body of a plain-language error (`ApiError` in app/domain/api.py). */
+/** Body of a plain-language error (`ApiError` in renocore/schemas/contracts.py). */
 export interface ApiErrorBody {
   code: string;
   message: string;

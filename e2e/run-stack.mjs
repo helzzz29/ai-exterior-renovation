@@ -91,7 +91,7 @@ async function waitFor(url, ms = 90_000) {
 console.log(`[stack] storage: ${storage}`);
 await run("prepare", "uv", ["run", "python", "../../e2e/scripts/stack.py", "prepare"], apiDir, { wait: true });
 run("api", "uv", ["run", "python", "../../e2e/scripts/stack.py", "api"], apiDir);
-run("worker", "uv", ["run", "python", "-m", "app.jobs.worker"], apiDir);
+run("worker", "uv", ["run", "python", "-m", "renocore.background.runner"], apiDir);
 await waitFor(`http://127.0.0.1:${API_PORT}/api/health`);
 console.log("[stack] api ready");
 run("web", "pnpm", ["exec", "vite", "--port", WEB_PORT, "--strictPort"], webDir);

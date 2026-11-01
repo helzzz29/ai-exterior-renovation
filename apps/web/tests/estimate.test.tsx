@@ -4,7 +4,7 @@ import { db } from "@/mocks/db";
 import { formatINR } from "@/lib/format";
 import { expectPlainLanguage, renderApp, seed } from "./helpers";
 
-describe("Step 6: Cost & report", () => {
+describe("Step 6: Budget & summary", () => {
   it("shows each line, the range in rupees and a measured badge", async () => {
     const { projectId, designId } = await seed("assigned");
     const { user } = renderApp(`/projects/${projectId}/cost?design=${designId}`);

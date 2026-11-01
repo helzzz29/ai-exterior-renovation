@@ -2,6 +2,13 @@
 
 A pre-construction planning assistant for house exteriors. A homeowner uploads one photo of the front of their house, checks the parts the system found, picks materials, sees their own house redesigned, and gets a transparent quantity and cost estimate as a PDF report to discuss with contractors.
 
+## Credits and changes
+
+This project is built on a codebase shared by a friend ([Jainam2806/renovation](https://github.com/Jainam2806/renovation)), used with their permission. Changes made on top of it:
+
+- Frontend: new dashboard shell with a sidebar, dark theme, project stats and search, and a tab-style step navigation.
+- Local setup fixes (pnpm build approvals, seed script for test accounts).
+
 ## How it works
 
 | Step | What happens | Who does it |
@@ -32,8 +39,8 @@ docker compose -f infra/docker-compose.yml up -d --wait   # Postgres (dev :5433,
 cd apps/api
 uv sync
 uv run alembic upgrade head
-uv run python -m app.main       # API on http://localhost:8000
-uv run python -m app.jobs.worker   # in a second terminal: background jobs
+uv run python -m renocore.server       # API on http://localhost:8000
+uv run python -m renocore.background.runner   # in a second terminal: background jobs
 
 cd ../web
 pnpm install

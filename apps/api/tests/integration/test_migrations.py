@@ -10,8 +10,8 @@ from alembic.migration import MigrationContext
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.pool import NullPool
 
-from app.migrations.filters import include_object
-from app.models import Base
+from renocore.revisions.filters import include_object
+from renocore.tables import Base
 from tests.integration.conftest import TEST_DB, alembic_config
 
 SCRATCH_DB = "reno_migration_check"

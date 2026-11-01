@@ -37,18 +37,18 @@ from alembic import command  # noqa: E402
 from alembic.config import Config  # noqa: E402
 from procrastinate.testing import InMemoryConnector  # noqa: E402
 
-from app import ai  # noqa: E402
-from app.config import get_settings  # noqa: E402
+from renocore import vision  # noqa: E402
+from renocore.settings import get_settings  # noqa: E402
 
 get_settings.cache_clear()
 
-import app.jobs.tasks  # noqa: E402,F401  (registers tasks)
-from app import db  # noqa: E402
-from app import storage as storage_mod  # noqa: E402
-from app.jobs.queue import queue_app  # noqa: E402
-from app.main import create_app  # noqa: E402
-from app.models import ALL_TABLES  # noqa: E402
-from app.services import catalogue  # noqa: E402
+import renocore.background.handlers  # noqa: E402,F401  (registers tasks)
+from renocore import blobstore as storage_mod  # noqa: E402
+from renocore import database as db  # noqa: E402
+from renocore.background.broker import queue_app  # noqa: E402
+from renocore.operations import materials_catalog as catalogue  # noqa: E402
+from renocore.server import create_app  # noqa: E402
+from renocore.tables import ALL_TABLES  # noqa: E402
 from tests.integration import fakes  # noqa: E402
 
 API_DIR = Path(__file__).resolve().parents[2]
@@ -71,7 +71,7 @@ async def _reset_schema() -> None:
 
 def alembic_config(url: str = TEST_DB) -> Config:
     cfg = Config(str(API_DIR / "alembic.ini"))
-    cfg.set_main_option("script_location", str(API_DIR / "app" / "migrations"))
+    cfg.set_main_option("script_location", str(API_DIR / "renocore" / "revisions"))
     cfg.set_main_option("sqlalchemy.url", url)
     return cfg
 
@@ -106,7 +106,7 @@ def provider(monkeypatch: pytest.MonkeyPatch) -> fakes.FakeProvider:
         fake.recorder = recorder
         return fake
 
-    monkeypatch.setattr(ai, "get_provider", factory)
+    monkeypatch.setattr(vision, "get_provider", factory)
     return fake
 
 
