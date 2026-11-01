@@ -315,9 +315,18 @@ cd apps/web
 pnpm dev:mock
 ```
 
-- Login credentials:
-  - **Email**: `demo@example.com`
-  - **Password**: `password123`
+### Pre-configured Login Accounts
+
+The system includes **4 ready-to-use user accounts** with distinct roles for testing multi-user isolation:
+
+| # | Role / Persona | Email | Password | Quick-Fill Button |
+|---|---|---|---|---|
+| **1** | **Homeowner 1 (Primary)** | `user1@example.com` | `User1@12345` | `User 1` |
+| **2** | **Homeowner 2 (Villa Project)** | `user2@example.com` | `User2@12345` | `User 2` |
+| **3** | **Architect / Contractor** | `user3@example.com` | `User3@12345` | `User 3` |
+| **4** | **Administrator** | `admin@example.com` | `Admin@12345` | `Admin` |
+
+*(Note: The login screen features 1-click **Quick Fill** buttons for each user, plus legacy support for `demo@example.com` / `password123`)*
 
 ---
 
