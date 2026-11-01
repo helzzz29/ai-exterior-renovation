@@ -21,7 +21,7 @@ import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { IS_MOCK, SIGNUP_OPEN } from "@/lib/config";
-import { DEMO_ACCOUNTS, DEMO_HINT } from "./demo";
+import { DEMO_HINT } from "./demo";
 
 /** Login and sign-up. App.tsx keys this by mode, so switching between them starts with a clean form. */
 export function AuthPage({ mode }: { mode: "login" | "register" }) {
@@ -165,28 +165,6 @@ export function AuthPage({ mode }: { mode: "login" | "register" }) {
                   <House className="size-3 text-blue-600" />
                   Renova Studio
                 </span>
-                {isLogin && (
-                  <div className="flex flex-wrap items-center gap-1">
-                    <span className="text-[10px] font-medium text-slate-400">Quick fill:</span>
-                    {DEMO_ACCOUNTS.map((acc) => (
-                      <button
-                        key={acc.email}
-                        type="button"
-                        onClick={() => {
-                          setEmail(acc.email);
-                          setPassword(acc.password);
-                          setErrors({});
-                          setFormError(null);
-                        }}
-                        className="inline-flex items-center gap-0.5 rounded-md border border-blue-200 bg-blue-50/80 px-1.5 py-0.5 text-[10px] font-semibold text-blue-700 transition hover:bg-blue-100 hover:text-blue-900 active:scale-95"
-                        title={`Fill ${acc.name} (${acc.role}): ${acc.email} / ${acc.password}`}
-                      >
-                        <Sparkles className="size-2.5 text-blue-600" />
-                        <span>{acc.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
               </div>
 
               <h1 className="text-xl sm:text-2xl font-bold leading-tight tracking-tight text-slate-900">
