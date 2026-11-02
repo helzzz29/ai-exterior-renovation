@@ -162,22 +162,48 @@ graph LR
 
 ## Technology Stack
 
-### Frontend (`apps/web`)
-- **Framework**: React 19, TypeScript, Vite
-- **Styling**: Tailwind CSS v4, Lucide React icons
-- **UI Components**: Radix UI primitives, shadcn/ui patterns
-- **Canvas Interaction**: `react-konva`, `konva` (HTML5 canvas polygon drawing and manipulation)
-- **Comparisons**: `react-compare-slider` (interactive Before/After reveals)
-- **Data Fetching**: `@tanstack/react-query` v5, `openapi-fetch`
+The platform is designed with a modern, decoupled architecture leveraging specialized tools for each layer:
 
-### Backend (`apps/api`)
-- **Framework**: Python 3.12, FastAPI, Pydantic v2
-- **Database & ORM**: PostgreSQL 16, SQLAlchemy 2.0 (asyncio), Alembic migrations
-- **Task Queue**: Procrastinate (PostgreSQL-backed asynchronous job worker)
-- **Geometry & Vision**: OpenCV, Shapely, Pillow (PIL), NumPy
-- **Generative AI**: `google-genai` (Gemini image generation & multimodal reasoning)
-- **PDF Generation**: ReportLab
-- **Package Manager**: Astral `uv`
+### Core Architecture & Infrastructure
+
+| Layer / Capability | Technology | Purpose & Role |
+| :--- | :--- | :--- |
+| **Frontend Framework** | **React 19 + TypeScript + Vite** | High-performance single-page app with strict type safety and sub-second HMR. |
+| **Styling & Design System** | **Tailwind CSS v4 + Radix UI + Lucide** | High-contrast Royal Blue & White UI, accessible modal dialogs, tabs, and iconography. |
+| **Interactive Canvas** | **React-Konva (`konva`)** | Hardware-accelerated HTML5 canvas for drawing, dragging, and nudging facade polygon points. |
+| **Visual Comparison** | **`react-compare-slider`** | Interactive Before/After image reveal slider with pan and zoom. |
+| **Server State & Caching**| **TanStack Query v5 (`@tanstack/react-query`)** | Client-side query caching, background polling for jobs, and optimistic UI updates. |
+| **Backend REST API** | **FastAPI (Python 3.12) + Pydantic v2** | High-throughput asynchronous API with OpenAPI 3.1 documentation and strict schema validation. |
+| **AI Vision & Makeover** | **Google Gemini API (`google-genai`)** | Multimodal facade architectural analysis, semantic boundary detection, and guided photorealistic inpainting. |
+| **Inpainting Assistant** | **Jev API (`jev-latest`)** | High-concurrency texture synthesis and edge inpainting support. |
+| **Relational Database** | **PostgreSQL 16 (Neon / Local)** | Acid-compliant storage for users, projects, designs, estimates, and polygon coordinates. |
+| **ORM & Migrations** | **SQLAlchemy 2.0 (asyncio) + Alembic** | Asynchronous database access and forward/backward schema migration management. |
+| **Asynchronous Job Runner**| **Procrastinate (PostgreSQL Queue)** | Background queue worker with exponential backoff retries for heavy AI & PDF tasks. |
+| **Cloud Object Storage** | **Backblaze B2 (S3-Compatible)** | Permanent cloud blob storage for user uploads, masks, AI renders, and PDF documents. |
+| **PDF & BOQ Generation** | **ReportLab + Pillow (PIL)** | Memory-bounded, contractor-ready architectural PDF reports with Indian Rupee formatting. |
+| **Cloud Hosting & CI/CD** | **Render.com (Docker Web Service)** | Multi-stage Docker container hosting with automated deploys from GitHub, health checks, and SSL. |
+| **Package Managers** | **pnpm (Frontend) & Astral `uv` (Backend)** | Lightning-fast, deterministic dependency resolution and lockfile management. |
+
+---
+
+### Detailed Component Breakdown
+
+#### 1. Frontend (`apps/web`)
+- **React 19 & TypeScript**: Provides cutting-edge React paradigms, strict typing, and clean component isolation.
+- **Tailwind CSS v4**: Utility-first styling with modern CSS variables, supporting the custom Royal Architectural Blue design system.
+- **React-Konva**: Renders high-resolution facade photos on an HTML5 canvas overlay, letting homeowners freely select and adjust boundary anchors.
+- **TanStack Query v5**: Automatically polls backend job statuses (detection, inpainting, PDF export) every 1–2 seconds with exponential falloff.
+
+#### 2. Backend & Task Worker (`apps/api`)
+- **FastAPI (Python 3.12)**: Serves endpoints for auth, project CRUD, catalogue rates, and export downloads.
+- **Procrastinate**: Uses PostgreSQL as an asynchronous job queue, eliminating the need for Redis in free cloud deployments.
+- **Image Pipeline Thread Pool**: Dedicated single-thread worker (`image-lane`) isolating heavy Pillow/OpenCV operations to ensure memory never exceeds 512 MB.
+
+#### 3. Cloud Services & Production Infrastructure
+- **Render.com**: Deploys the production Docker image containing both the static React bundle and the FastAPI backend + worker in one unified service.
+- **Backblaze B2 (S3 API)**: Stores high-resolution facade photos and generated PDFs securely behind private signed access URLs.
+- **Neon Cloud PostgreSQL**: Provides serverless, high-availability PostgreSQL with connection pooling.
+- **Google Gemini**: Powers zero-shot architectural understanding and texture-guided exterior transformation.
 
 ---
 
